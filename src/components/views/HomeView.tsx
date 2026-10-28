@@ -3,38 +3,38 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
 import { formatDate, getBlogPosts, getServices } from "@/lib/content";
 import { AXES, LINKS, UI, type Lang } from "@/lib/dict";
-import { SITE_NAME, LAWYER_NAME, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
+import { SITE_NAME, SITE_NAME_EN, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 
 const COPY = {
   tr: {
-    description: "Gerçek Hukuk ve Arabuluculuk Bürosu — Av. Kazım Onur Gerçek LL.M. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
+    description: "Av. Kazım Onur Gerçek – Avukatlık Bürosu. Avukat ve arabulucu. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
     kicker: "Avukat · Arabulucu",
-    h1a: "Gerçek Hukuk ve", h1b: "Arabuluculuk Bürosu",
-    lead: "Av. Kazım Onur Gerçek LL.M. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma. İstanbul 1 No'lu Barosu.",
+    h1a: "Av. Kazım Onur Gerçek", h1b: "Avukatlık Bürosu",
+    lead: "Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma. İstanbul 1 No'lu Barosu.",
     areasLabel: "Çalışma Alanları", areasH2: "Hangi konuda yardım almak istiyorsunuz?", seeAll: "Tümünü Gör",
     creds: ["Marmara Ünv. Hukuk Fakültesi", "Yeditepe Ünv. Özel Hukuk LL.M", "Gazi Ünv. Adli Bilişim Y.L.", "İstanbul 1 No'lu Baro Üyesi"],
     cv: "Özgeçmiş",
-    bio1: "2008'de Marmara Üniversitesi Hukuk Fakültesi'nden mezun oldu. 2014–2020 yılları arasında Yeditepe Üniversitesi'nde kıdemli avukat olarak kurumun ve bağlı şirketlerinin dava ve sözleşme süreçlerini, KVKK uyum sürecini ve YÖK nezdindeki işlerini yürüttü.",
+    bio1: "2008'de Marmara Üniversitesi Hukuk Fakültesi'nden mezun oldu, 2009'dan bu yana avukat. 2014–2020 yılları arasında bir vakıf üniversitesinde kıdemli avukat olarak kurumun dava ve sözleşme süreçlerini, KVKK uyum sürecini ve YÖK nezdindeki işlerini yürüttü.",
     bio2: "Ekim 2020'den bu yana serbest avukat olarak çalışıyor; 2023'ten beri arabulucu.",
     place: "Kadıköy, İstanbul — Pazartesi–Cuma 09:00–18:00",
     postsLabel: "Hukuki Değerlendirmeler", postsH2: "Son Yazılar",
-    ctaH2: "Hukuki sorununuzu birlikte değerlendirelim.",
+    ctaH2: "Randevu ve İletişim",
     ctaText: "Randevu talebi için formu doldurabilir, arayabilir veya WhatsApp ile yazabilirsiniz. Pazartesi–Cuma 09:00–18:00.",
     wa: "WhatsApp ile Yazın", location: "Konum", hours: "Çalışma Saatleri",
   },
   en: {
-    description: "Gerçek Law and Mediation Office, Istanbul — Av. Kazım Onur Gerçek LL.M. Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation.",
+    description: "Av. Kazım Onur Gerçek – Law Office, Istanbul. Attorney and mediator. Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation.",
     kicker: "Attorney · Mediator",
-    h1a: "Gerçek Law and", h1b: "Mediation Office",
-    lead: "Av. Kazım Onur Gerçek LL.M. Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation. Istanbul Bar Association.",
+    h1a: "Av. Kazım Onur Gerçek", h1b: "Law Office",
+    lead: "Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation. Istanbul Bar Association.",
     areasLabel: "Practice Areas", areasH2: "How can we help?", seeAll: "View all",
     creds: ["Marmara University, Faculty of Law", "Yeditepe University, LL.M in Private Law", "Gazi University, MSc Forensic Informatics", "Member of the Istanbul Bar"],
     cv: "Profile",
-    bio1: "Graduated from Marmara University Faculty of Law in 2008. From 2014 to 2020 he was senior counsel at Yeditepe University, handling the litigation and contracts of the university and its affiliates, its data protection compliance and its proceedings before the Council of Higher Education.",
+    bio1: "Graduated from Marmara University Faculty of Law in 2008 and has practised law since 2009. From 2014 to 2020 he was senior counsel at a foundation university, handling its litigation and contracts, data protection compliance and proceedings before the Council of Higher Education.",
     bio2: "In independent practice since October 2020; mediator since 2023.",
     place: "Kadıköy, Istanbul — Monday–Friday 09:00–18:00",
     postsLabel: "Legal Notes", postsH2: "Latest Articles",
-    ctaH2: "Let's look at your legal matter together.",
+    ctaH2: "Appointments and Contact",
     ctaText: "To request an appointment, fill in the contact form, call or write on WhatsApp. Monday–Friday 09:00–18:00 (Istanbul time).",
     wa: "Write on WhatsApp", location: "Location", hours: "Office Hours",
   },
@@ -42,7 +42,7 @@ const COPY = {
 
 export const homeMetadata = (lang: Lang): Metadata => ({
   ...buildMetadata({ title: SITE_NAME, description: COPY[lang].description, path: lang === "tr" ? "" : "/en", lang }),
-  title: { absolute: `${SITE_NAME} | ${LAWYER_NAME}` },
+  title: { absolute: lang === "tr" ? `${SITE_NAME} | Avukat ve Arabulucu` : `${SITE_NAME_EN} | Attorney and Mediator, Istanbul` },
 });
 
 export default function HomeView({ lang }: { lang: Lang }) {

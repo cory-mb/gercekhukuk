@@ -29,7 +29,7 @@ const COPY = {
     dataLink: "Aydınlatma Metni",
     faq: "Sık Sorulan Sorular",
     faqs: [
-      { question: "Online görüşme ücretli mi?", answer: "Evet. Avukatlık hizmeti ücretlidir ve meslek kuralları gereği ücretsiz danışmanlık verilmez. Görüşme ücreti randevu sırasında bildirilir." },
+      { question: "Online görüşme ücretli mi?", answer: "Evet. Görüşme ücreti randevu sırasında bildirilir ve Avukatlık Asgari Ücret Tarifesi'nin altında olamaz." },
       { question: "Görüşmeden sonra dava takibi de yapılabilir mi?", answer: "Görüşme, durumunuzun değerlendirilmesi ve yol haritası içindir. Dava veya icra takibi gibi işler için ayrıca avukatlık sözleşmesi yapılır." },
       { question: "Yurt dışından görüşme yapılabilir mi?", answer: "Evet. Görüşmeler video konferansla yapıldığından bulunduğunuz yer önemli değildir; Türk hukukuna ilişkin konularda danışmanlık verilir." },
     ],
@@ -57,7 +57,7 @@ const COPY = {
     dataLink: "Privacy Notice",
     faq: "Frequently Asked Questions",
     faqs: [
-      { question: "Is the online consultation paid?", answer: "Yes. Legal services are paid, and under professional rules free consultations are not offered. The fee is communicated when the appointment is arranged." },
+      { question: "Is the online consultation paid?", answer: "Yes. The fee is communicated when the appointment is arranged and cannot be lower than the Turkish minimum attorney fee tariff." },
       { question: "Can you take on the case after the consultation?", answer: "The consultation is for assessing your situation and planning next steps. Litigation or enforcement work requires a separate engagement agreement." },
       { question: "Can I have a consultation from abroad?", answer: "Yes. Calls are held by video, so your location does not matter; advice is given on matters of Turkish law." },
     ],

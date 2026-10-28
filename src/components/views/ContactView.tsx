@@ -1,28 +1,28 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
 import { buildMetadata } from "@/lib/metadata";
-import { PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
+import { BARO_SICIL, EMAIL, KEP, PHONE, PHONE_DISPLAY, PRACTICE_SINCE, TBB_SICIL } from "@/lib/schema";
 import ContactForm from "@/components/ContactForm";
 import { LINKS, UI, type Lang } from "@/lib/dict";
 
 const COPY = {
   tr: {
     title: "İletişim ve Randevu Talebi",
-    description: "Gerçek Hukuk ve Arabuluculuk Bürosu ile iletişim: randevu talep formu, telefon, e-posta ve WhatsApp. Pazartesi–Cuma 09:00–18:00.",
+    description: "Av. Kazım Onur Gerçek – Avukatlık Bürosu ile iletişim: randevu talep formu, telefon, e-posta ve WhatsApp. Pazartesi–Cuma 09:00–18:00.",
     intro: "Randevu talebiniz için formu doldurabilir, arayabilir veya WhatsApp üzerinden yazabilirsiniz.",
     info: "İletişim Bilgileri", address: "Adres", addressValue: "Kadıköy, İstanbul / Türkiye", hours: "Çalışma Saatleri",
     wa: "WhatsApp ile Yaz", waSub: "Hızlı yanıt için tercih edin",
     onlinePre: "Büroya gelemiyorsanız", onlineLink: "online danışmanlık", onlinePost: "seçeneğine bakabilirsiniz.",
-    bar: "Baro Bilgileri", barText: "İstanbul 1 No'lu Barosu üyesi",
+    bar: "Baro Bilgileri", barText: "İstanbul 1 No'lu Barosu üyesi", since: `Mesleğe başlama: ${PRACTICE_SINCE}`,
   },
   en: {
     title: "Contact and Appointments",
-    description: "Contact Gerçek Law and Mediation Office in Istanbul: appointment request form, phone, email and WhatsApp. Monday–Friday 09:00–18:00.",
+    description: "Contact Av. Kazım Onur Gerçek – Law Office in Istanbul: appointment request form, phone, email and WhatsApp. Monday–Friday 09:00–18:00.",
     intro: "To request an appointment, fill in the form, call or write to us on WhatsApp. We work in Turkish and English.",
     info: "Contact Details", address: "Address", addressValue: "Kadıköy, Istanbul / Turkey", hours: "Office Hours",
     wa: "Write on WhatsApp", waSub: "Usually the quickest way to reach us",
     onlinePre: "If you cannot visit the office, see", onlineLink: "online consultation", onlinePost: ".",
-    bar: "Bar Membership", barText: "Member of the Istanbul Bar Association",
+    bar: "Bar Membership", barText: "Member of the Istanbul Bar Association", since: `Practising since ${PRACTICE_SINCE}`,
   },
 };
 
@@ -107,8 +107,12 @@ export default function ContactView({ lang }: { lang: Lang }) {
 
               <div style={{ marginTop: "1.25rem", padding: "1.25rem", border: "1px solid var(--border)", fontSize: "0.875rem", color: "var(--text-muted)" }}>
                 <strong style={{ color: "var(--text)", display: "block", marginBottom: "0.375rem" }}>{c.bar}</strong>
+                Av. Kazım Onur Gerçek LL.M<br />
                 {c.barText}<br />
-                Av. Kazım Onur Gerçek LL.M
+                {c.since}
+                {BARO_SICIL && <><br />Baro sicil no: {BARO_SICIL}</>}
+                {TBB_SICIL && <><br />TBB sicil no: {TBB_SICIL}</>}
+                {KEP && <><br />KEP: {KEP}</>}
               </div>
             </div>
           </aside>

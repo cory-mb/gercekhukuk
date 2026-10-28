@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
+import { PHONE, PHONE_DISPLAY, EMAIL, SITE_NAME, SITE_NAME_EN } from "@/lib/schema";
 import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
 
 export default function Footer({ lang }: { lang: Lang }) {
@@ -15,7 +15,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             <Link href={L.home} className="inline-block mb-5">
               <Image
                 src="/logo.png"
-                alt="Gerçek Hukuk ve Arabuluculuk Bürosu"
+                alt={lang === "tr" ? SITE_NAME : SITE_NAME_EN}
                 width={140}
                 height={42}
                 className="h-9 w-auto brightness-0 invert opacity-90"
@@ -109,7 +109,7 @@ export default function Footer({ lang }: { lang: Lang }) {
             color: "rgba(255,255,255,0.25)",
           }}
         >
-          <p>© {new Date().getFullYear()} Gerçek Hukuk ve Arabuluculuk Bürosu. {t.rights}</p>
+          <p>© {new Date().getFullYear()} {lang === "tr" ? SITE_NAME : SITE_NAME_EN}. {t.rights}</p>
           <p>{t.bar}</p>
         </div>
       </div>

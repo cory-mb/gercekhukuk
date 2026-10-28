@@ -4,11 +4,11 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import { buildMetadata } from "@/lib/metadata";
 import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
-import { personSchema } from "@/lib/schema";
+import { BARO_SICIL, KEP, PRACTICE_SINCE, TBB_SICIL, personSchema } from "@/lib/schema";
 
 const COPY = {
   tr: {
-    title: "Hakkımda — Av. Kazım Onur Gerçek LL.M",
+    title: "Hakkımda",
     description: "Av. Kazım Onur Gerçek LL.M: Marmara Üniversitesi Hukuk Fakültesi (2008), Gazi Üniversitesi Adli Bilişim ve Yeditepe Üniversitesi Özel Hukuk yüksek lisansı. 2023'ten beri arabulucu.",
     subtitle: "Avukat · Arabulucu · Hukuk Danışmanı",
     edu: "Eğitim",
@@ -18,17 +18,19 @@ const COPY = {
       { kurum: "Yeditepe Üniversitesi", bolum: "Özel Hukuk Yüksek Lisansı — LL.M (2020)" },
     ],
     bar: "Baro", barText: "İstanbul 1 No'lu Barosu üyesi",
+    since: `Mesleğe başlama: ${PRACTICE_SINCE}`, mediator: "Arabulucu: 2023'ten bu yana", baroSicil: "Baro sicil no", tbbSicil: "TBB sicil no", kep: "KEP",
+    langTitle: "Yabancı Dil", langText: "İngilizce",
     p1: "Av. Kazım Onur Gerçek, 2008 yılında Marmara Üniversitesi Hukuk Fakültesi'nden mezun oldu. Gazi Üniversitesi'nde Adli Bilişim yüksek lisansını (2015) ve Yeditepe Üniversitesi'nde Özel Hukuk yüksek lisansını (2020) tamamladı.",
-    h2: "Ankara (2009–2014)",
-    p2: "2009–2014 yılları arasında Ankara'da Tahir Yahya İlhan Hukuk Bürosu'nda enerji, inşaat, maden ve halı sektörlerinde büyük çaplı şirketlere, kamu yararına çalışan uzman hekim derneklerine ve bireysel müvekkillere ticaret, iş, borçlar, fikri mülkiyet, idare, sağlık, icra ve iflas hukuku alanlarında hukuki destek sundu.",
-    h3: "Yeditepe Üniversitesi (2014–2020)",
-    p3: "2014–2020 yılları arasında Yeditepe Üniversitesi'nde kıdemli avukat olarak kurumun ve bağlı şirketlerinin tüm dava ve sözleşme süreçlerini, KVKK uyum sürecini ve YÖK nezdindeki süreçlerini yürüttü; hukuk ekibine liderlik etti.",
+    h2: "2009–2014",
+    p2: "2009–2014 yılları arasında Ankara'da avukat olarak ticaret, iş, borçlar, fikri mülkiyet, idare, sağlık, icra ve iflas hukuku alanlarında çalıştı.",
+    h3: "2014–2020",
+    p3: "2014–2020 yılları arasında bir vakıf üniversitesinde kıdemli avukat olarak kurumun ve bağlı şirketlerinin dava ve sözleşme süreçlerini, KVKK uyum sürecini ve YÖK nezdindeki süreçlerini yürüttü.",
     h4: "Serbest Avukatlık ve Arabuluculuk (2020 – Günümüz)",
     p4: "Ekim 2020'den bu yana serbest avukat olarak yükseköğretim, şirketler, iş, borçlar, icra hukuku, hukuki risk yönetimi, KVKK uyum, iş geliştirme ve kurumsallaşma gibi alanlarda çalışmaktadır. 2023'ten beri arabulucudur. İstanbul 1 No'lu Barosu üyesidir.",
     areas: "Çalışma Alanları",
   },
   en: {
-    title: "About — Av. Kazım Onur Gerçek LL.M",
+    title: "About",
     description: "Av. Kazım Onur Gerçek LL.M: Marmara University Faculty of Law (2008), master's degrees in Forensic Informatics (Gazi University) and Private Law (Yeditepe University). Mediator since 2023.",
     subtitle: "Attorney · Mediator · Legal Adviser",
     edu: "Education",
@@ -38,11 +40,13 @@ const COPY = {
       { kurum: "Yeditepe University", bolum: "LL.M in Private Law (2020)" },
     ],
     bar: "Bar", barText: "Member of the Istanbul Bar Association",
+    since: `Practising since ${PRACTICE_SINCE}`, mediator: "Mediator since 2023", baroSicil: "Bar registration no.", tbbSicil: "TBB registration no.", kep: "Registered email (KEP)",
+    langTitle: "Languages", langText: "Turkish, English",
     p1: "Av. Kazım Onur Gerçek graduated from Marmara University Faculty of Law in 2008. He completed a master's degree in Forensic Informatics at Gazi University (2015) and an LL.M in Private Law at Yeditepe University (2020).",
-    h2: "Ankara (2009–2014)",
-    p2: "From 2009 to 2014 he worked at Tahir Yahya İlhan Law Office in Ankara, advising large companies in the energy, construction, mining and carpet sectors, public-interest associations of medical specialists and individual clients on commercial, employment, obligations, intellectual property, administrative, health, and enforcement and insolvency law.",
-    h3: "Yeditepe University (2014–2020)",
-    p3: "From 2014 to 2020 he was senior counsel at Yeditepe University, handling all litigation and contract matters of the university and its affiliated companies, its data protection (KVKK) compliance process and its proceedings before the Council of Higher Education (YÖK). He led the legal team.",
+    h2: "2009–2014",
+    p2: "From 2009 to 2014 he practised law in Ankara in commercial, employment, obligations, intellectual property, administrative, health, and enforcement and insolvency law.",
+    h3: "2014–2020",
+    p3: "From 2014 to 2020 he was senior counsel at a foundation university, handling the litigation and contract matters of the university and its affiliated companies, its data protection (KVKK) compliance process and its proceedings before the Council of Higher Education (YÖK).",
     h4: "Independent Practice and Mediation (2020 – present)",
     p4: "Since October 2020 he has practised independently in higher education, corporate, employment, obligations and enforcement law, legal risk management, data protection compliance, and business development and institutionalisation. He has been a mediator since 2023 and is a member of the Istanbul Bar Association.",
     areas: "Practice Areas",
@@ -107,7 +111,21 @@ export default function AboutView({ lang }: { lang: Lang }) {
                 <p style={{ fontFamily: "'Lato', sans-serif", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "1.25rem" }}>
                   {c.bar}
                 </p>
-                <p style={{ fontSize: "0.9375rem", color: "var(--text)" }}>{c.barText}</p>
+                <ul style={{ display: "flex", flexDirection: "column", gap: "0.375rem", fontSize: "0.9375rem", color: "var(--text)" }}>
+                  <li>{c.barText}</li>
+                  <li>{c.since}</li>
+                  <li>{c.mediator}</li>
+                  {BARO_SICIL && <li>{c.baroSicil}: {BARO_SICIL}</li>}
+                  {TBB_SICIL && <li>{c.tbbSicil}: {TBB_SICIL}</li>}
+                  {KEP && <li>{c.kep}: {KEP}</li>}
+                </ul>
+              </div>
+
+              <div style={{ borderTop: "1px solid var(--border)", paddingTop: "2rem" }}>
+                <p style={{ fontFamily: "'Lato', sans-serif", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "1.25rem" }}>
+                  {c.langTitle}
+                </p>
+                <p style={{ fontSize: "0.9375rem", color: "var(--text)" }}>{c.langText}</p>
               </div>
 
               <div style={{ borderTop: "1px solid var(--border)", paddingTop: "2rem", display: "flex", flexDirection: "column", gap: "0.75rem" }}>

@@ -5,7 +5,7 @@ import { EMAIL } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "Privacy Notice",
-  description: "Privacy notice on the processing of personal data — Gerçek Law and Mediation Office.",
+  description: "Privacy notice on the processing of personal data — Av. Kazım Onur Gerçek – Law Office.",
   path: "/en/privacy-notice",
   noIndex: true,
   lang: "en",
@@ -29,7 +29,7 @@ export default function PrivacyNoticePage() {
           <em>This is an English translation of our <a href="/kvkk" lang="tr">Turkish privacy notice</a>. In case of any discrepancy, the Turkish text prevails.</em>
         </p>
         <p>
-          As Gerçek Law and Mediation Office (Gerçek Hukuk ve Arabuluculuk Bürosu), we process the personal data obtained when you use our
+          As Av. Kazım Onur Gerçek – Law Office (Avukatlık Bürosu), we process the personal data obtained when you use our
           website as data controller under Personal Data Protection Law No. 6698 (&quot;KVKK&quot;) and related legislation, as explained below.
           The data controller is Av. Kazım Onur Gerçek.
         </p>

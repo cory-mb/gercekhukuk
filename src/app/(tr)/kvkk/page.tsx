@@ -5,7 +5,7 @@ import { EMAIL } from "@/lib/schema";
 
 export const metadata: Metadata = buildMetadata({
   title: "KVKK Aydınlatma Metni",
-  description: "Kişisel verilerin işlenmesi hakkında aydınlatma metni — Gerçek Hukuk ve Arabuluculuk Bürosu.",
+  description: "Kişisel verilerin işlenmesi hakkında aydınlatma metni — Av. Kazım Onur Gerçek – Avukatlık Bürosu.",
   path: "/kvkk",
   noIndex: true,
 });
@@ -26,7 +26,7 @@ export default function KvkkPage() {
 
       <div className="max-w-4xl mx-auto px-6 lg:px-12 py-14 prose-content">
         <p>
-          Gerçek Hukuk ve Arabuluculuk Bürosu olarak, internet sitemizi kullanmanız sırasında elde edilen kişisel verilerinizi, 6698 sayılı
+          Av. Kazım Onur Gerçek – Avukatlık Bürosu olarak, internet sitemizi kullanmanız sırasında elde edilen kişisel verilerinizi, 6698 sayılı
           Kişisel Verilerin Korunması Kanunu (&quot;KVKK&quot;) ve ilgili mevzuat kapsamında, veri sorumlusu sıfatıyla aşağıda açıklanan
           kapsamda işlemekteyiz. Veri sorumlusu Av. Kazım Onur Gerçek&apos;tir.
         </p>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, SITE_NAME } from "./schema";
+import { SITE_URL, SITE_NAME, SITE_NAME_EN } from "./schema";
 import { getPathPairs } from "./content";
 import type { Lang } from "./dict";
 
@@ -27,7 +27,8 @@ export function buildMetadata({
 }): Metadata {
   const url = `${SITE_URL}${path}`;
   // Layout title.template site adını ekler; OG/Twitter template almadığı için elle eklenir.
-  const fullTitle = `${title} | ${SITE_NAME}`;
+  const name = lang === "tr" ? SITE_NAME : SITE_NAME_EN;
+  const fullTitle = `${title} | ${name}`;
 
   return {
     title,
@@ -38,7 +39,7 @@ export function buildMetadata({
       title: fullTitle,
       description,
       url,
-      siteName: SITE_NAME,
+      siteName: name,
       locale: lang === "tr" ? "tr_TR" : "en_GB",
       type: "website",
       images: [
@@ -46,7 +47,7 @@ export function buildMetadata({
           url: `${SITE_URL}/og-image.png`,
           width: 1200,
           height: 630,
-          alt: SITE_NAME,
+          alt: name,
         },
       ],
     },

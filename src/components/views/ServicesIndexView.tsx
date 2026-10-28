@@ -7,13 +7,13 @@ import { AXES, LINKS, UI, type Lang } from "@/lib/dict";
 
 const COPY = {
   tr: {
-    description: "Gerçek Hukuk ve Arabuluculuk Bürosu hizmetleri: şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
+    description: "Av. Kazım Onur Gerçek – Avukatlık Bürosu hizmetleri: şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
     intro: "Bireysel ve kurumsal müvekkillere üç ana alanda danışmanlık ve temsil hizmeti verilmektedir.",
     ctaQ: "Hangi konuda yardım almak istiyorsunuz?",
     ctaText: "Hukuki durumunuzu görüşmek için randevu talep edebilirsiniz.",
   },
   en: {
-    description: "Services of Gerçek Law and Mediation Office: corporate advisory and regulatory compliance, litigation and dispute resolution, business development for law firms.",
+    description: "Services of Av. Kazım Onur Gerçek – Law Office: corporate advisory and regulatory compliance, litigation and dispute resolution, business development for law firms.",
     intro: "We advise and represent individual and corporate clients in three main areas.",
     ctaQ: "Which matter can we help you with?",
     ctaText: "You can request an appointment to discuss your legal situation.",

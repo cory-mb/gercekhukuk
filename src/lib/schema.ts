@@ -1,11 +1,17 @@
 import { SERVICE_LINKS } from "./dict";
 
 export const SITE_URL = "https://www.gercekhukuk.com.tr";
-export const SITE_NAME = "Gerçek Hukuk ve Arabuluculuk Bürosu";
+export const SITE_NAME = "Av. Kazım Onur Gerçek – Avukatlık Bürosu";
+export const SITE_NAME_EN = "Av. Kazım Onur Gerçek – Law Office";
 export const LAWYER_NAME = "Av. Kazım Onur Gerçek LL.M";
 export const PHONE = "+905356823872";
 export const PHONE_DISPLAY = "+90 535 682 38 72";
 export const EMAIL = "gercekavukatlik@gmail.com";
+export const PRACTICE_SINCE = "2009";
+// Owner'dan gelince doldurulur; boşken sayfada gösterilmez.
+export const BARO_SICIL = "";
+export const TBB_SICIL = "";
+export const KEP = "";
 // Online danışmanlık: owner randevu aracını ve TBB onaylı POS ödeme linkini seçince doldurulur; boşken buton forma gider.
 export const BOOKING_URL = "";
 export const PAYMENT_URL = "";
@@ -72,6 +78,7 @@ export function personSchema() {
       { "@type": "CollegeOrUniversity", name: "Yeditepe Üniversitesi" },
     ],
     memberOf: { "@type": "Organization", name: "İstanbul 1 No'lu Barosu" },
+    knowsLanguage: ["tr", "en"],
     sameAs: ["https://www.linkedin.com/in/kaz%C4%B1m-onur-ger%C3%A7ek-ll-m-213648104"],
   };
 }
