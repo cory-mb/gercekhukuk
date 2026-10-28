@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getBlogSlugs, getServices } from "@/lib/content";
+import { getBlogSlugs, getServices, getTools } from "@/lib/content";
 import { SITE_URL } from "@/lib/schema";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/hakkimda`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/hizmetler`, lastModified: now, changeFrequency: "monthly", priority: 0.9 },
     { url: `${SITE_URL}/yazilar`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${SITE_URL}/hesaplama-araclari`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/sss`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     { url: `${SITE_URL}/iletisim`, lastModified: now, changeFrequency: "yearly", priority: 0.6 },
     { url: `${SITE_URL}/kvkk`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
@@ -30,5 +31,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  return [...staticPages, ...servicePages, ...blogPages];
+  const toolPages: MetadataRoute.Sitemap = getTools().map((t) => ({
+    url: `${SITE_URL}/hesaplama-araclari/${t.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...servicePages, ...toolPages, ...blogPages];
 }

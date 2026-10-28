@@ -10,6 +10,7 @@ const NAV = [
   { href: "/hizmetler", label: "Hizmetler", children: SERVICE_LINKS },
   { href: "/hakkimda", label: "Hakkımda" },
   { href: "/yazilar", label: "Yazılar" },
+  { href: "/hesaplama-araclari", label: "Hesaplama" },
   { href: "/sss", label: "SSS" },
   { href: "/iletisim", label: "İletişim" },
 ];

@@ -92,6 +92,36 @@ export function getService(slug: string): Service | null {
   return getServices().find((s) => s.slug === slug) ?? null;
 }
 
+export interface Tool {
+  slug: string;
+  title: string;
+  seoTitle?: string;
+  description: string;
+  summary: string;
+  tool: string;
+  service?: string;
+  order: number;
+  faqs: { q: string; a: string }[];
+  content: string;
+}
+
+export function getTools(dir = "hesaplama"): Tool[] {
+  return readEntries(dir)
+    .map(({ slug, data, content }) => ({
+      slug,
+      title: data.title ?? "",
+      seoTitle: data.seoTitle,
+      description: data.description ?? "",
+      summary: data.summary ?? "",
+      tool: data.tool ?? slug,
+      service: data.service,
+      order: data.order ?? 99,
+      faqs: data.faqs ?? [],
+      content,
+    }))
+    .sort((a, b) => a.order - b.order);
+}
+
 export function formatDate(date: string): string {
   return new Date(date).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
 }

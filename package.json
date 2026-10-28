@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --port 3010",
     "build": "next build",
-    "start": "next start --port 3010"
+    "start": "next start --port 3010",
+    "test": "node --test src/lib/hesaplama/"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
