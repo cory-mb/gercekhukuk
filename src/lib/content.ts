@@ -1,11 +1,19 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { Lang } from "./dict";
 
 const contentDir = path.join(process.cwd(), "src/content");
 
+const DIRS = {
+  blog: { tr: "blog", en: "en/articles" },
+  services: { tr: "hizmetler", en: "en/services" },
+  tools: { tr: "hesaplama", en: "en/calculators" },
+};
+
 export interface BlogPost {
   slug: string;
+  alt?: string;
   title: string;
   seoTitle?: string;
   description: string;
@@ -20,6 +28,7 @@ export type Axis = "danismanlik" | "dava" | "kurumsallasma";
 
 export interface Service {
   slug: string;
+  alt?: string;
   title: string;
   seoTitle?: string;
   description: string;
@@ -29,6 +38,20 @@ export interface Service {
   related: string[];
   updated: string;
   readTime: string;
+  faqs: { q: string; a: string }[];
+  content: string;
+}
+
+export interface Tool {
+  slug: string;
+  alt?: string;
+  title: string;
+  seoTitle?: string;
+  description: string;
+  summary: string;
+  tool: string;
+  service?: string;
+  order: number;
   faqs: { q: string; a: string }[];
   content: string;
 }
@@ -45,10 +68,11 @@ function readEntries(dir: string) {
     });
 }
 
-export function getBlogPosts(): BlogPost[] {
-  return readEntries("blog")
+export function getBlogPosts(lang: Lang = "tr"): BlogPost[] {
+  return readEntries(DIRS.blog[lang])
     .map(({ slug, data, content }) => ({
       slug,
+      alt: data.alt,
       title: data.title ?? "",
       seoTitle: data.seoTitle,
       description: data.description ?? "",
@@ -61,18 +85,19 @@ export function getBlogPosts(): BlogPost[] {
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 }
 
-export function getBlogPost(slug: string): BlogPost | null {
-  return getBlogPosts().find((p) => p.slug === slug) ?? null;
+export function getBlogPost(slug: string, lang: Lang = "tr"): BlogPost | null {
+  return getBlogPosts(lang).find((p) => p.slug === slug) ?? null;
 }
 
-export function getBlogSlugs(): string[] {
-  return getBlogPosts().map((p) => p.slug);
+export function getBlogSlugs(lang: Lang = "tr"): string[] {
+  return getBlogPosts(lang).map((p) => p.slug);
 }
 
-export function getServices(): Service[] {
-  return readEntries("hizmetler")
+export function getServices(lang: Lang = "tr"): Service[] {
+  return readEntries(DIRS.services[lang])
     .map(({ slug, data, content }) => ({
       slug,
+      alt: data.alt,
       title: data.title ?? "",
       seoTitle: data.seoTitle,
       description: data.description ?? "",
@@ -88,27 +113,15 @@ export function getServices(): Service[] {
     .sort((a, b) => a.order - b.order);
 }
 
-export function getService(slug: string): Service | null {
-  return getServices().find((s) => s.slug === slug) ?? null;
+export function getService(slug: string, lang: Lang = "tr"): Service | null {
+  return getServices(lang).find((s) => s.slug === slug) ?? null;
 }
 
-export interface Tool {
-  slug: string;
-  title: string;
-  seoTitle?: string;
-  description: string;
-  summary: string;
-  tool: string;
-  service?: string;
-  order: number;
-  faqs: { q: string; a: string }[];
-  content: string;
-}
-
-export function getTools(dir = "hesaplama"): Tool[] {
-  return readEntries(dir)
+export function getTools(lang: Lang = "tr"): Tool[] {
+  return readEntries(DIRS.tools[lang])
     .map(({ slug, data, content }) => ({
       slug,
+      alt: data.alt,
       title: data.title ?? "",
       seoTitle: data.seoTitle,
       description: data.description ?? "",
@@ -122,12 +135,26 @@ export function getTools(dir = "hesaplama"): Tool[] {
     .sort((a, b) => a.order - b.order);
 }
 
-export function formatDate(date: string): string {
-  return new Date(date).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+export function formatDate(date: string, lang: Lang = "tr"): string {
+  return new Date(date).toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", { day: "numeric", month: "long", year: "numeric" });
 }
 
-export const AXES: { key: Axis; label: string; desc: string }[] = [
-  { key: "danismanlik", label: "Şirketlere Hukuki Danışmanlık ve Mevzuata Uyum", desc: "Şirketler hukuku, sözleşme yönetimi, hukuki risk ve uyum süreçleri." },
-  { key: "dava", label: "Dava ve Uyuşmazlık Çözümü", desc: "Yükseköğretim, iş, borçlar, icra, aile hukuku, bilişim suçları ve arabuluculuk." },
-  { key: "kurumsallasma", label: "İş Geliştirme ve Kurumsallaşma", desc: "Hukuk bürolarına iş geliştirme ve kurumsallaşma desteği." },
-];
+// TR yolu ↔ EN yolu. EN içerik dosyaları frontmatter'da `alt: <tr-slug>` taşır.
+export function getPathPairs(): [string, string][] {
+  const pairs = (items: { slug: string; alt?: string }[], tr: string, en: string) =>
+    items.filter((i) => i.alt).map((i) => [`${tr}/${i.alt}`, `${en}/${i.slug}`] as [string, string]);
+  return [
+    ["/", "/en"],
+    ["/hakkimda", "/en/about"],
+    ["/hizmetler", "/en/services"],
+    ["/iletisim", "/en/contact"],
+    ["/sss", "/en/faq"],
+    ["/yazilar", "/en/articles"],
+    ["/kvkk", "/en/privacy-notice"],
+    ["/hesaplama-araclari", "/en/calculators"],
+    ["/online-danismanlik", "/en/online-consultation"],
+    ...pairs(getServices("en"), "/hizmetler", "/en/services"),
+    ...pairs(getBlogPosts("en"), "/yazilar", "/en/articles"),
+    ...pairs(getTools("en"), "/hesaplama-araclari", "/en/calculators"),
+  ];
+}

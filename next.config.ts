@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // İki root layout ((tr), (en)) olduğu için eşleşmeyen URL'ler app/global-not-found.tsx ile karşılanır.
+  experimental: { globalNotFound: true },
   async redirects() {
     return [
       { source: "/eki-bi-mi-z", destination: "/hakkimda", permanent: true },

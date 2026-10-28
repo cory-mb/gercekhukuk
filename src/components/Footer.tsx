@@ -1,16 +1,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
-import { SERVICE_LINKS } from "@/lib/nav";
+import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
 
-export default function Footer() {
+export default function Footer({ lang }: { lang: Lang }) {
+  const t = UI[lang];
+  const L = LINKS[lang];
   return (
     <footer style={{ background: "var(--surface-dark)", color: "rgba(255,255,255,0.55)" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block mb-5">
+            <Link href={L.home} className="inline-block mb-5">
               <Image
                 src="/logo.png"
                 alt="Gerçek Hukuk ve Arabuluculuk Bürosu"
@@ -20,7 +22,7 @@ export default function Footer() {
               />
             </Link>
             <p style={{ fontSize: "0.875rem", lineHeight: 1.7, color: "rgba(255,255,255,0.45)", maxWidth: "20rem" }}>
-              Av. Kazım Onur Gerçek LL.M — Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, iş geliştirme ve kurumsallaşma.
+              {t.tagline}
             </p>
             <a
               href="https://www.linkedin.com/in/kaz%C4%B1m-onur-ger%C3%A7ek-ll-m-213648104"
@@ -38,10 +40,10 @@ export default function Footer() {
           {/* Hizmetler */}
           <div>
             <p style={{ fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", fontFamily: "'Lato', sans-serif" }}>
-              Hizmetler
+              {t.services}
             </p>
             <ul style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {SERVICE_LINKS.map((h) => (
+              {SERVICE_LINKS[lang].map((h) => (
                 <li key={h.href}>
                   <Link href={h.href} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.45)", textDecoration: "none", transition: "color 0.2s" }}>
                     {h.label}
@@ -54,7 +56,7 @@ export default function Footer() {
           {/* İletişim */}
           <div>
             <p style={{ fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", fontFamily: "'Lato', sans-serif" }}>
-              İletişim
+              {t.contact}
             </p>
             <ul style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
               <li>
@@ -68,19 +70,19 @@ export default function Footer() {
                 </a>
               </li>
               <li style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.45)" }}>
-                Kadıköy, İstanbul
+                {t.location}
               </li>
               <li style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.45)" }}>
-                Pzt–Cum 09:00–18:00
+                {t.hours}
               </li>
             </ul>
             <div style={{ marginTop: "1.25rem", display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
               {[
-                { href: "/hakkimda", label: "Hakkımda" },
-                { href: "/sss", label: "SSS" },
-                { href: "/hesaplama-araclari", label: "Hesaplama Araçları" },
-                { href: "/online-danismanlik", label: "Online Danışmanlık" },
-                { href: "/kvkk", label: "KVKK" },
+                { href: L.about, label: t.about },
+                { href: L.faq, label: t.faq },
+                { href: L.calculators, label: t.calculatorsLong },
+                { href: L.online, label: t.online },
+                { href: L.privacy, label: t.privacy },
               ].map((l) => (
                 <Link
                   key={l.href}
@@ -107,8 +109,8 @@ export default function Footer() {
             color: "rgba(255,255,255,0.25)",
           }}
         >
-          <p>© {new Date().getFullYear()} Gerçek Hukuk ve Arabuluculuk Bürosu. Tüm hakları saklıdır.</p>
-          <p>İstanbul Barosu Üyesi</p>
+          <p>© {new Date().getFullYear()} Gerçek Hukuk ve Arabuluculuk Bürosu. {t.rights}</p>
+          <p>{t.bar}</p>
         </div>
       </div>
     </footer>

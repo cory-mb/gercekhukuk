@@ -1,6 +1,6 @@
 // Hesaplama araçlarının tek parametre kaynağı. Her değer için yürürlük ve kaynak yazılı.
 // Bakım: kıdem tavanı Ocak/Temmuz, kira oranı her ay TÜİK bülteninden (ayın 3'ü), arabuluculuk tarifesi her yıl Aralık sonu.
-export const GUNCELLEME = "28 Ekim 2026";
+export const GUNCELLEME = "2026-10-28";
 
 // Hazine ve Maliye Bakanlığı Mali ve Sosyal Haklar Genelgesi; tarih = iş sözleşmesinin sona erdiği gün.
 export const KIDEM_TAVANI = [
@@ -12,7 +12,7 @@ export const DAMGA_VERGISI = 0.00759;
 export const GELIR_VERGISI_DILIMLERI = [0.15, 0.2, 0.27, 0.35, 0.4];
 
 // TBK m.344: bir önceki kira yılında TÜFE 12 aylık ortalamalara göre değişim (TÜİK, Eylül 2026 bülteni, 05.10.2026).
-export const KIRA_ARTIS = { donem: "Ekim 2026", oran: 31.49 };
+export const KIRA_ARTIS = { donem: "Ekim 2026", donemEn: "October 2026", oran: 31.49 };
 
 // 2026 Arabuluculuk Asgari Ücret Tarifesi (RG 26.12.2025). Saat ücretleri toplam: [2 taraf, 3-5, 6-10, 11+].
 export const ARABULUCULUK_TURLERI = {

@@ -4,21 +4,25 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { SERVICE_LINKS } from "@/lib/nav";
+import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
 
-const NAV = [
-  { href: "/hizmetler", label: "Hizmetler", children: SERVICE_LINKS },
-  { href: "/hakkimda", label: "Hakkımda" },
-  { href: "/yazilar", label: "Yazılar" },
-  { href: "/hesaplama-araclari", label: "Hesaplama" },
-  { href: "/sss", label: "SSS" },
-  { href: "/iletisim", label: "İletişim" },
-];
-
-export default function Header() {
+// pairs: [trYolu, enYolu] — layout sunucuda içerikten üretir, burada dil değiştirici için kullanılır.
+export default function Header({ lang, pairs }: { lang: Lang; pairs: [string, string][] }) {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const pathname = usePathname();
+  const t = UI[lang];
+  const L = LINKS[lang];
+  const NAV = [
+    { href: L.services, label: t.services, children: SERVICE_LINKS[lang] },
+    { href: L.about, label: t.about },
+    { href: L.articles, label: t.articles },
+    { href: L.calculators, label: t.calculators },
+    { href: L.faq, label: t.faq },
+    { href: L.contact, label: t.contact },
+  ];
+  const pair = pairs.find((p) => p[lang === "tr" ? 0 : 1] === pathname);
+  const switchHref = pair ? pair[lang === "tr" ? 1 : 0] : LINKS[t.switchLang as Lang].home;
 
   return (
     <header
@@ -28,7 +32,7 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 lg:h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href={L.home} className="flex items-center">
             <Image
               src="/logo.png"
               alt="Gerçek Hukuk ve Arabuluculuk Bürosu"
@@ -94,8 +98,11 @@ export default function Header() {
                 </Link>
               )
             )}
+            <Link href={switchHref} hrefLang={t.switchLang} lang={t.switchLang} className="px-3 py-2 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text)]">
+              {t.switchLabel}
+            </Link>
             <Link
-              href="/iletisim"
+              href={L.contact}
               style={{
                 marginLeft: "0.75rem",
                 padding: "0.5rem 1.25rem",
@@ -118,7 +125,7 @@ export default function Header() {
                 (e.currentTarget as HTMLAnchorElement).style.color = "var(--text)";
               }}
             >
-              Randevu Talep Et
+              {t.cta}
             </Link>
           </nav>
 
@@ -126,7 +133,7 @@ export default function Header() {
           <button
             className="lg:hidden text-[var(--text)] p-2"
             onClick={() => setOpen(!open)}
-            aria-label="Menüyü aç/kapat"
+            aria-label={t.menu}
           >
             <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               {open ? (
@@ -163,6 +170,9 @@ export default function Header() {
                 ))}
               </div>
             ))}
+            <Link href={switchHref} hrefLang={t.switchLang} lang={t.switchLang} className="block px-4 py-3 text-sm font-medium text-[var(--text-muted)]" onClick={() => setOpen(false)}>
+              {t.switchLabel}
+            </Link>
           </div>
         )}
       </div>

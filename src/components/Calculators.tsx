@@ -22,7 +22,7 @@ const T = {
     kidem: "Severance pay", ihbar: "Notice pay", brut: "Gross", damga: "Stamp duty", gelir: "Income tax", net: "Net",
     sure: "Length of service", gun: "days", hafta: "weeks", tavanNot: "Pay exceeds the severance ceiling, so the ceiling was used:", tavanYok: "No ceiling is defined for this termination date; severance pay was not calculated.",
     kidemYok: "Severance pay requires at least one year of service.",
-    kira: "Current monthly rent", oran: "Increase rate (%)", oranNot: `12-month average CPI change for ${KIRA_ARTIS.donem}: ${KIRA_ARTIS.oran}%`, artis: "Increase", yeni: "New rent",
+    kira: "Current monthly rent", oran: "Increase rate (%)", oranNot: `12-month average CPI change for ${KIRA_ARTIS.donemEn}: ${KIRA_ARTIS.oran}%`, artis: "Increase", yeni: "New rent",
     tur: "Dispute type", taraf: "Number of parties", sonuc: "Outcome", anlasma: "Settlement reached", anlasmama: "No settlement", tutar: "Settlement amount",
     ucretSonuc: "Mediation fee", nispi: "Proportional fee", asgari: "Minimum fee", saat: "Hourly fee", anlasmamaNot: "In mandatory mediation, two hours' fee is paid from the Ministry of Justice budget.", anlasmaNot: "Shared equally by the parties unless agreed otherwise.",
     anapara: "Principal", bas: "Start (default) date", bit: "Calculation date", faiz: "Interest", toplam: "Total", donem: "Period", oranKisa: "Rate",

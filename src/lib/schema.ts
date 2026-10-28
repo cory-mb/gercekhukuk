@@ -1,4 +1,4 @@
-import { SERVICE_LINKS } from "./nav";
+import { SERVICE_LINKS } from "./dict";
 
 export const SITE_URL = "https://www.gercekhukuk.com.tr";
 export const SITE_NAME = "Gerçek Hukuk ve Arabuluculuk Bürosu";
@@ -48,7 +48,7 @@ export function localBusinessSchema() {
     hasOfferCatalog: {
       "@type": "OfferCatalog",
       name: "Hukuki Hizmetler",
-      itemListElement: SERVICE_LINKS.map((l) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: l.label, url: `${SITE_URL}${l.href}` } })),
+      itemListElement: SERVICE_LINKS.tr.map((l) => ({ "@type": "Offer", itemOffered: { "@type": "Service", name: l.label, url: `${SITE_URL}${l.href}` } })),
     },
     sameAs: [
       "https://www.linkedin.com/in/kaz%C4%B1m-onur-ger%C3%A7ek-ll-m-213648104",
