@@ -1,15 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
-
-const HIZMETLER = [
-  { href: "/hizmetler/yuksekogrenim-hukuku", label: "Yükseköğretim Hukuku" },
-  { href: "/hizmetler/docentlik-iptal-davalari", label: "Doçentlik İptal Davaları" },
-  { href: "/hizmetler/is-hukuku", label: "İş Hukuku" },
-  { href: "/hizmetler/arabuluculuk", label: "Arabuluculuk" },
-  { href: "/hizmetler/kira-hukuku", label: "Kira Hukuku" },
-  { href: "/hizmetler/sozlesmeler-hukuku", label: "Sözleşmeler Hukuku" },
-];
+import { SERVICE_LINKS } from "@/lib/nav";
 
 export default function Footer() {
   return (
@@ -28,7 +20,7 @@ export default function Footer() {
               />
             </Link>
             <p style={{ fontSize: "0.875rem", lineHeight: 1.7, color: "rgba(255,255,255,0.45)", maxWidth: "20rem" }}>
-              Av. Kazım Onur Gerçek LL.M — Yükseköğretim hukuku, iş hukuku ve arabuluculuk.
+              Av. Kazım Onur Gerçek LL.M — Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, iş geliştirme ve kurumsallaşma.
             </p>
             <a
               href="https://www.linkedin.com/in/kaz%C4%B1m-onur-ger%C3%A7ek-ll-m-213648104"
@@ -49,7 +41,7 @@ export default function Footer() {
               Hizmetler
             </p>
             <ul style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {HIZMETLER.map((h) => (
+              {SERVICE_LINKS.map((h) => (
                 <li key={h.href}>
                   <Link href={h.href} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.45)", textDecoration: "none", transition: "color 0.2s" }}>
                     {h.label}

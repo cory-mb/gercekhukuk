@@ -4,20 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
+import { SERVICE_LINKS } from "@/lib/nav";
 
 const NAV = [
-  { href: "/hizmetler/yuksekogrenim-hukuku", label: "Yükseköğretim Hukuku" },
-  {
-    href: "/hizmetler",
-    label: "Hizmetler",
-    children: [
-      { href: "/hizmetler/docentlik-iptal-davalari", label: "Doçentlik İptal Davaları" },
-      { href: "/hizmetler/is-hukuku", label: "İş Hukuku" },
-      { href: "/hizmetler/arabuluculuk", label: "Arabuluculuk" },
-      { href: "/hizmetler/kira-hukuku", label: "Kira Hukuku" },
-      { href: "/hizmetler/sozlesmeler-hukuku", label: "Sözleşmeler Hukuku" },
-    ],
-  },
+  { href: "/hizmetler", label: "Hizmetler", children: SERVICE_LINKS },
   { href: "/hakkimda", label: "Hakkımda" },
   { href: "/yazilar", label: "Yazılar" },
   { href: "/sss", label: "SSS" },
@@ -64,7 +54,7 @@ export default function Header() {
                     </svg>
                   </button>
                   <div
-                    className="absolute top-full left-0 mt-1 w-56 shadow-xl py-1 z-50"
+                    className="absolute top-full left-0 mt-1 w-80 shadow-xl py-1 z-50"
                     style={{ background: "var(--surface-dark-2)", border: "1px solid rgba(255,255,255,0.08)" }}
                     onMouseEnter={() => setDropdownOpen(true)}
                     onMouseLeave={() => setDropdownOpen(false)}
@@ -90,8 +80,6 @@ export default function Header() {
                   style={
                     pathname === item.href
                       ? { color: "var(--gold-light)" }
-                      : item.href === "/hizmetler/yuksekogrenim-hukuku"
-                      ? { color: "var(--gold)" }
                       : { color: "rgba(255,255,255,0.75)" }
                   }
                 >

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
-import { getBlogPosts } from "@/lib/content";
+import { AXES, formatDate, getBlogPosts, getServices } from "@/lib/content";
 import { SITE_NAME, LAWYER_NAME, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 
 export const metadata: Metadata = {
@@ -14,109 +14,9 @@ export const metadata: Metadata = {
   title: { absolute: `${SITE_NAME} | ${LAWYER_NAME}` },
 };
 
-const HIZMETLER = [
-  {
-    href: "/hizmetler/yuksekogrenim-hukuku",
-    title: "Yükseköğretim Hukuku",
-    featured: true,
-    desc: "Vakıf yükseköğretim kurumları ile öğrenci, akademik ve idari personeller arasındaki uyuşmazlıklar ve hak ihlali davaları.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/docentlik-iptal-davalari",
-    title: "Doçentlik İptal Davaları",
-    featured: true,
-    desc: "Doçentlik başvurusunun reddi kararlarına karşı Danıştay ve idare mahkemelerinde iptal davası açılması ve yürütülmesi.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.988 5.988 0 01-2.031.352 5.988 5.988 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L18.75 4.971zm-16.5.52c.99-.203 1.99-.377 3-.52m0 0l2.62 10.726c.122.499-.106 1.028-.589 1.202a5.989 5.989 0 01-2.031.352 5.989 5.989 0 01-2.031-.352c-.483-.174-.711-.703-.59-1.202L5.25 4.971z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/is-hukuku",
-    title: "İş Hukuku",
-    desc: "İşçi-işveren uyuşmazlıkları, iş akdi feshi, kıdem ve ihbar tazminatı, mobing ve iş kazası davaları.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 14.15v4.25c0 1.094-.787 2.036-1.872 2.18-2.087.277-4.216.42-6.378.42s-4.291-.143-6.378-.42c-1.085-.144-1.872-1.086-1.872-2.18v-4.25m16.5 0a2.18 2.18 0 00.75-1.661V8.706c0-1.081-.768-2.015-1.837-2.175a48.114 48.114 0 00-3.413-.387m4.5 8.006c-.194.165-.42.295-.673.38A23.978 23.978 0 0112 15.75c-2.648 0-5.195-.429-7.577-1.22a2.016 2.016 0 01-.673-.38m0 0A2.18 2.18 0 013 12.489V8.706c0-1.081.768-2.015 1.837-2.175a48.111 48.111 0 013.413-.387m7.5 0V5.25A2.25 2.25 0 0013.5 3h-3a2.25 2.25 0 00-2.25 2.25v.894m7.5 0a48.667 48.667 0 00-7.5 0M12 12.75h.008v.008H12v-.008z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/arabuluculuk",
-    title: "Arabuluculuk",
-    desc: "+500 dosyada anlaşma sağlamış deneyimli arabulucu. İş hukuku, kira ve ticari uyuşmazlıklarda dava dışı çözüm.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/kira-hukuku",
-    title: "Kira Hukuku",
-    desc: "Tahliye davaları, kira artış uyuşmazlıkları, kira tespiti ve kira sözleşmesi hazırlanması.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/sozlesmeler-hukuku",
-    title: "Sözleşmeler Hukuku",
-    desc: "Sözleşme hazırlanması, incelenmesi, müzakeresi ve ihlallerinde hukuki süreç yönetimi.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/idare-hukuku",
-    title: "İdare Hukuku",
-    desc: "İdari işlem iptali, tam yargı davaları, idari para cezaları ve yükseköğretim kurumu uyuşmazlıkları.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21v-8.25M15.75 21v-8.25M8.25 21v-8.25M3 9l9-6 9 6m-1.5 12V10.332A48.36 48.36 0 0012 9.75c-2.551 0-5.056.2-7.5.582V21M3 21h18M12 6.75h.008v.008H12V6.75z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/kvkk-danismanligi",
-    title: "KVKK Danışmanlığı",
-    desc: "Kişisel veri uyum süreçleri, VERBİS kaydı, aydınlatma metni hazırlama ve veri ihlali yönetimi.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z" />
-      </svg>
-    ),
-  },
-  {
-    href: "/hizmetler/ticaret-hukuku",
-    title: "Ticaret Hukuku",
-    desc: "Şirket kuruluş ve yapılandırma, ticari sözleşme uyuşmazlıkları, ortaklık anlaşmazlıkları ve alacak tahsili.",
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.5} className="w-6 h-6">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008zm0 3h.008v.008h-.008v-.008z" />
-      </svg>
-    ),
-  },
-];
-
-const EKSENLER = [
-  { label: "Şirketlere Hukuki Danışmanlık ve Mevzuata Uyum", desc: "Şirketler hukuku, sözleşme yönetimi, hukuki risk ve uyum süreçleri." },
-  { label: "Dava ve Uyuşmazlık Çözümü", desc: "Yükseköğretim, iş, borçlar, icra, aile hukuku, bilişim suçları ve arabuluculuk." },
-  { label: "İş Geliştirme ve Kurumsallaşma", desc: "Hukuk bürolarına iş geliştirme ve kurumsallaşma desteği." },
-];
-
 export default function AnasayfaPage() {
   const sonYazilar = getBlogPosts().slice(0, 3);
+  const hizmetler = getServices();
 
   return (
     <>
@@ -184,7 +84,7 @@ export default function AnasayfaPage() {
                   gap: "1.75rem",
                 }}
               >
-                {EKSENLER.map((e) => (
+                {AXES.map((e) => (
                   <div key={e.label}>
                     <div
                       style={{
@@ -253,84 +153,37 @@ export default function AnasayfaPage() {
             </Link>
           </div>
 
-          <div style={{ borderTop: "1px solid var(--border)" }}>
-            {HIZMETLER.map((h, i) => (
-              <Link
-                key={h.href}
-                href={h.href}
-                className="service-row"
-                style={{ textDecoration: "none" }}
-              >
-                {/* Index */}
-                <span
-                  style={{
-                    fontFamily: "'Lato', sans-serif",
-                    fontSize: "0.6875rem",
-                    fontWeight: 700,
-                    letterSpacing: "0.06em",
-                    color: "var(--text-light)",
-                  }}
-                >
-                  0{i + 1}
-                </span>
-
-                {/* Content */}
-                <div>
-                  <div style={{ display: "flex", alignItems: "baseline", gap: "0.75rem", flexWrap: "wrap" }}>
-                    <span
-                      style={{
-                        fontFamily: "'EB Garamond', serif",
-                        fontSize: "1.375rem",
-                        fontWeight: 500,
-                        color: "var(--text)",
-                        lineHeight: 1.3,
-                      }}
-                    >
-                      {h.title}
-                    </span>
-                    {h.featured && (
-                      <span
-                        style={{
-                          fontFamily: "'Lato', sans-serif",
-                          fontSize: "0.5625rem",
-                          fontWeight: 700,
-                          letterSpacing: "0.14em",
-                          textTransform: "uppercase",
-                          color: "var(--gold)",
-                        }}
-                      >
-                        Uzman
+          {AXES.map((axis) => (
+            <div key={axis.key} style={{ marginBottom: "2.5rem" }}>
+              <h3 className="section-label">{axis.label}</h3>
+              <div style={{ borderTop: "1px solid var(--border)" }}>
+                {hizmetler
+                  .filter((h) => h.axis === axis.key)
+                  .map((h) => (
+                    <Link key={h.slug} href={`/hizmetler/${h.slug}`} className="service-row" style={{ textDecoration: "none" }}>
+                      <span style={{ fontFamily: "'Lato', sans-serif", fontSize: "0.6875rem", fontWeight: 700, letterSpacing: "0.06em", color: "var(--text-light)" }}>
+                        {String(h.order).padStart(2, "0")}
                       </span>
-                    )}
-                  </div>
-                  <p
-                    style={{
-                      fontSize: "0.875rem",
-                      color: "var(--text-muted)",
-                      lineHeight: 1.6,
-                      marginTop: "0.25rem",
-                    }}
-                  >
-                    {h.desc}
-                  </p>
-                </div>
-
-                {/* Arrow */}
-                <svg
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  className="service-row-arrow"
-                  style={{ width: "1.125rem", height: "1.125rem" }}
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </Link>
-            ))}
-          </div>
+                      <div>
+                        <span style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.375rem", fontWeight: 500, color: "var(--text)", lineHeight: 1.3 }}>
+                          {h.title}
+                        </span>
+                        <p style={{ fontSize: "0.875rem", color: "var(--text-muted)", lineHeight: 1.6, marginTop: "0.25rem" }}>
+                          {h.summary}
+                        </p>
+                      </div>
+                      <svg viewBox="0 0 20 20" fill="currentColor" className="service-row-arrow" style={{ width: "1.125rem", height: "1.125rem" }}>
+                        <path
+                          fillRule="evenodd"
+                          d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                          clipRule="evenodd"
+                        />
+                      </svg>
+                    </Link>
+                  ))}
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -518,7 +371,7 @@ export default function AnasayfaPage() {
                       paddingTop: "0.25rem",
                     }}
                   >
-                    {post.date}
+                    {formatDate(post.date)}
                   </div>
                 </Link>
               ))}

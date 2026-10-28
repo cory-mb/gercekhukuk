@@ -29,14 +29,20 @@ const nextConfig: NextConfig = {
       },
       {
         source: "/kira-hukuku",
-        destination: "/hizmetler/kira-hukuku",
+        destination: "/hizmetler/borclar-hukuku",
         permanent: true,
       },
       {
         source: "/s%C3%B6zle%C5%9Fmeler-hukuku",
-        destination: "/hizmetler/sozlesmeler-hukuku",
+        destination: "/hizmetler/sirketler-hukuku-ve-sozlesme-yonetimi",
         permanent: true,
       },
+      // Owner'ın yeni hizmet yapısında birleşen eski sayfalar
+      { source: "/hizmetler/kira-hukuku", destination: "/hizmetler/borclar-hukuku", permanent: true },
+      { source: "/hizmetler/ticaret-hukuku", destination: "/hizmetler/sirketler-hukuku-ve-sozlesme-yonetimi", permanent: true },
+      { source: "/hizmetler/sozlesmeler-hukuku", destination: "/hizmetler/sirketler-hukuku-ve-sozlesme-yonetimi", permanent: true },
+      { source: "/hizmetler/kvkk-danismanligi", destination: "/hizmetler/hukuki-risk-yonetimi-ve-mevzuata-uyum", permanent: true },
+      { source: "/hizmetler/idare-hukuku", destination: "/hizmetler/yuksekogrenim-hukuku", permanent: true },
       {
         source: "/post/:slug*",
         destination: "/yazilar/:slug*",

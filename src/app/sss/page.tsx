@@ -42,7 +42,7 @@ const SSS_KATEGORILER = [
       {
         question: "Kıdem tazminatına hak kazanmak için ne gerekir?",
         answer:
-          "En az 1 yıl çalışmış olmak ve iş sözleşmesinin; işveren tarafından haksız fesih, emeklilik, askerlik, evlilik (kadın işçi) veya ölüm nedeniyle sona ermesi gerekir. Kendi isteğiyle istifa eden işçi kıdem tazminatı alamaz.",
+          "En az 1 yıl çalışmış olmak ve iş sözleşmesinin; işveren tarafından haksız fesih, emeklilik, askerlik, evlilik (kadın işçi) veya ölüm nedeniyle sona ermesi gerekir. Haklı bir neden olmadan istifa eden işçi kural olarak kıdem tazminatı alamaz; işçinin haklı nedenle feshinde bu hak korunur.",
       },
       {
         question: "Mobing davası açılabilmek için ne ispatlanmalı?",
@@ -67,7 +67,7 @@ const SSS_KATEGORILER = [
     ],
   },
   {
-    kategori: "Kira Hukuku",
+    kategori: "Kira (Borçlar Hukuku)",
     sorular: [
       {
         question: "Kiracı kirayı ödemezse ne yapılır?",
@@ -77,7 +77,12 @@ const SSS_KATEGORILER = [
       {
         question: "Ev sahibi kira sözleşmesini feshedebilir mi?",
         answer:
-          "Belirli süreli kira sözleşmeleri; süre dolduğunda belirli koşullarla, belirsiz süreli sözleşmeler ise yasal fesih ihbar sürelerine uyularak feshedilebilir. Konut kiralarında kiraya veren, süre sonunda ihtiyaç veya tahliye taahhüdü dışında sözleşmeyi feshedemez.",
+          "Konut ve çatılı işyeri kiralarında kiraya veren, sözleşme süresinin bitmesini tek başına gerekçe yapamaz. Sözleşmeyi kural olarak ancak ihtiyaç, yeniden inşa, tahliye taahhüdü gibi kanuni sebeplerle veya on yıllık uzama süresi dolduktan sonra sona erdirebilir.",
+      },
+      {
+        question: "Kira uyuşmazlığında dava açmadan önce arabulucuya gitmek zorunlu mu?",
+        answer:
+          "Evet. 1 Eylül 2023'ten bu yana kira ilişkisinden doğan uyuşmazlıklarda dava açmadan önce arabulucuya başvurmak dava şartıdır. İcra takibi yoluyla tahliyeye ilişkin hükümler bunun dışındadır.",
       },
     ],
   },
