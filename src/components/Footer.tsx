@@ -79,6 +79,7 @@ export default function Footer() {
                 { href: "/hakkimda", label: "Hakkımda" },
                 { href: "/sss", label: "SSS" },
                 { href: "/hesaplama-araclari", label: "Hesaplama Araçları" },
+                { href: "/online-danismanlik", label: "Online Danışmanlık" },
                 { href: "/kvkk", label: "KVKK" },
               ].map((l) => (
                 <Link

@@ -113,6 +113,10 @@ export default function IletisimPage() {
                 </div>
               </a>
 
+              <p style={{ marginTop: "1.25rem", fontSize: "0.875rem", color: "var(--text-muted)" }}>
+                Büroya gelemiyorsanız <a href="/online-danismanlik" style={{ color: "var(--text)", textDecoration: "underline" }}>online danışmanlık</a> seçeneğine bakabilirsiniz.
+              </p>
+
               <div style={{ marginTop: "1.25rem", padding: "1.25rem", border: "1px solid var(--border)", fontSize: "0.875rem", color: "var(--text-muted)" }}>
                 <strong style={{ color: "var(--text)", display: "block", marginBottom: "0.375rem" }}>Baro Bilgileri</strong>
                 İstanbul 1 No&apos;lu Barosu üyesi<br />
