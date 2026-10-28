@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
 import { buildMetadata } from "@/lib/metadata";
-import { PHONE, EMAIL } from "@/lib/schema";
+import { PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = buildMetadata({
-  title: "İletişim — Randevu ve Danışmanlık",
+  title: "İletişim ve Randevu Talebi",
   description:
-    "Av. Kazım Onur Gerçek LL.M ile iletişime geçin. İstanbul Kadıköy ofisimizde randevu alın veya WhatsApp ile ulaşın. Pzt–Cum 09:00–18:00.",
+    "Gerçek Hukuk ve Arabuluculuk Bürosu ile iletişim: randevu talep formu, telefon, e-posta ve WhatsApp. Pazartesi–Cuma 09:00–18:00.",
   path: "/iletisim",
 });
 
@@ -28,6 +28,12 @@ const BILGILER = [
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
       </svg>
     ),
+    label: "Telefon",
+    value: PHONE_DISPLAY,
+    href: `tel:${PHONE}`,
+  },
+  {
+    icon: null,
     label: "E-posta",
     value: EMAIL,
     href: `mailto:${EMAIL}`,
@@ -55,7 +61,7 @@ export default function IletisimPage() {
             İletişim
           </h1>
           <p style={{ marginTop: "0.75rem", color: "var(--text-muted)", fontSize: "0.9375rem" }}>
-            Her türlü danışma ve soru için formu doldurun veya WhatsApp üzerinden ulaşın.
+            Randevu talebiniz için formu doldurabilir, arayabilir veya WhatsApp üzerinden yazabilirsiniz.
           </p>
         </div>
       </div>

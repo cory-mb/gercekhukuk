@@ -2,12 +2,12 @@ export const SITE_URL = "https://www.gercekhukuk.com.tr";
 export const SITE_NAME = "Gerçek Hukuk ve Arabuluculuk Bürosu";
 export const LAWYER_NAME = "Av. Kazım Onur Gerçek LL.M";
 export const PHONE = "+905356823872";
+export const PHONE_DISPLAY = "+90 535 682 38 72";
 export const EMAIL = "gercekavukatlik@gmail.com";
+// Owner istemiyor: sokak/posta kodu/koordinat yok, yalnız ilçe düzeyi.
 export const ADDRESS = {
-  streetAddress: "Kadıköy",
   addressLocality: "Kadıköy",
   addressRegion: "İstanbul",
-  postalCode: "34738",
   addressCountry: "TR",
 };
 
@@ -30,11 +30,6 @@ export function localBusinessSchema() {
     address: {
       "@type": "PostalAddress",
       ...ADDRESS,
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 40.9881,
-      longitude: 29.0232,
     },
     openingHoursSpecification: [
       {

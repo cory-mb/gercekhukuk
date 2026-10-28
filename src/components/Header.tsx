@@ -131,7 +131,7 @@ export default function Header() {
                 (e.currentTarget as HTMLAnchorElement).style.borderColor = "rgba(201,168,76,0.6)";
               }}
             >
-              Randevu Al
+              Randevu Talep Et
             </Link>
           </nav>
 

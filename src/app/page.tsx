@@ -2,13 +2,17 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
 import { getBlogPosts } from "@/lib/content";
+import { SITE_NAME, LAWYER_NAME, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 
-export const metadata: Metadata = buildMetadata({
-  title: "İstanbul Avukat — Yükseköğretim, İdare ve İş Hukuku",
-  description:
-    "Av. Kazım Onur Gerçek LL.M — İstanbul Kadıköy'de yükseköğretim hukuku, doçentlik iptal davaları, iş hukuku, idare hukuku, KVKK danışmanlığı, ticaret hukuku ve arabuluculuk alanlarında uzman avukat.",
-  path: "",
-});
+export const metadata: Metadata = {
+  ...buildMetadata({
+    title: SITE_NAME,
+    description:
+      "Gerçek Hukuk ve Arabuluculuk Bürosu — Av. Kazım Onur Gerçek LL.M. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
+    path: "",
+  }),
+  title: { absolute: `${SITE_NAME} | ${LAWYER_NAME}` },
+};
 
 const HIZMETLER = [
   {
@@ -105,6 +109,12 @@ const HIZMETLER = [
   },
 ];
 
+const EKSENLER = [
+  { label: "Şirketlere Hukuki Danışmanlık ve Mevzuata Uyum", desc: "Şirketler hukuku, sözleşme yönetimi, hukuki risk ve uyum süreçleri." },
+  { label: "Dava ve Uyuşmazlık Çözümü", desc: "Yükseköğretim, iş, borçlar, icra, aile hukuku, bilişim suçları ve arabuluculuk." },
+  { label: "İş Geliştirme ve Kurumsallaşma", desc: "Hukuk bürolarına iş geliştirme ve kurumsallaşma desteği." },
+];
+
 export default function AnasayfaPage() {
   const sonYazilar = getBlogPosts().slice(0, 3);
 
@@ -127,7 +137,7 @@ export default function AnasayfaPage() {
                   marginBottom: "2.5rem",
                 }}
               >
-                İstanbul Barosu Üyesi
+                Avukat · Arabulucu
               </p>
 
               <h1
@@ -140,25 +150,25 @@ export default function AnasayfaPage() {
                   letterSpacing: "-0.025em",
                 }}
               >
-                Hukukta Deneyim,
+                Gerçek Hukuk ve
                 <br />
                 <em style={{ fontStyle: "italic", color: "var(--gold-muted)" }}>
-                  Sonuçta Güven.
+                  Arabuluculuk Bürosu
                 </em>
               </h1>
 
               <div style={{ width: "64px", height: "1.5px", background: "var(--gold)", margin: "2.5rem 0" }} />
 
               <p style={{ color: "var(--text-muted)", maxWidth: "36rem", fontSize: "1rem", lineHeight: 1.8 }}>
-                Av. Kazım Onur Gerçek LL.M — Yükseköğretim hukuku ve doçentlik davalarında uzman. İş hukuku, idare hukuku, KVKK ve ticari uyuşmazlıklarda deneyimli avukat ve arabulucu. Kadıköy, İstanbul.
+                Av. Kazım Onur Gerçek LL.M. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma. İstanbul 1 No&apos;lu Barosu.
               </p>
 
               <div className="flex flex-wrap gap-3 mt-10">
                 <Link href="/iletisim" className="btn-primary">
-                  Ücretsiz Görüşme
+                  Randevu Talep Et
                 </Link>
                 <Link href="/hakkimda" className="btn-secondary">
-                  Özgeçmiş
+                  Hakkımda
                 </Link>
               </div>
             </div>
@@ -174,36 +184,28 @@ export default function AnasayfaPage() {
                   gap: "1.75rem",
                 }}
               >
-                {[
-                  { num: "15+", label: "Yıllık Deneyim" },
-                  { num: "+500", label: "Arabuluculuk Dosyası" },
-                  { num: "+250", label: "Dava" },
-                  { num: "+1000", label: "Sözleşme" },
-                ].map((item) => (
-                  <div key={item.label}>
+                {EKSENLER.map((e) => (
+                  <div key={e.label}>
                     <div
                       style={{
                         fontFamily: "'EB Garamond', serif",
-                        fontSize: "2rem",
+                        fontSize: "1.375rem",
                         fontWeight: 500,
                         color: "var(--text)",
-                        lineHeight: 1,
+                        lineHeight: 1.25,
                       }}
                     >
-                      {item.num}
+                      {e.label}
                     </div>
                     <div
                       style={{
-                        fontFamily: "'Lato', sans-serif",
-                        fontSize: "0.625rem",
-                        fontWeight: 700,
-                        letterSpacing: "0.12em",
-                        textTransform: "uppercase",
+                        fontSize: "0.8125rem",
                         color: "var(--text-muted)",
-                        marginTop: "0.25rem",
+                        marginTop: "0.375rem",
+                        lineHeight: 1.5,
                       }}
                     >
-                      {item.label}
+                      {e.desc}
                     </div>
                   </div>
                 ))}
@@ -221,7 +223,7 @@ export default function AnasayfaPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
             <div>
-              <p className="section-label">Uzmanlık Alanları</p>
+              <p className="section-label">Çalışma Alanları</p>
               <h2
                 style={{
                   fontFamily: "'EB Garamond', serif",
@@ -338,7 +340,7 @@ export default function AnasayfaPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             {/* Left — name + credentials */}
             <div>
-              <p className="section-label">Av. Kazım Onur Gerçek LL.M</p>
+              <p className="section-label">Hakkımda</p>
               <h2
                 style={{
                   fontFamily: "'EB Garamond', serif",
@@ -348,9 +350,7 @@ export default function AnasayfaPage() {
                   lineHeight: 1.15,
                 }}
               >
-                Deneyimli temsil,
-                <br />
-                <em style={{ fontStyle: "italic", color: "var(--gold-muted)" }}>güvenilir sonuçlar.</em>
+                Av. Kazım Onur Gerçek LL.M
               </h2>
 
               <div
@@ -380,10 +380,10 @@ export default function AnasayfaPage() {
 
               <div style={{ marginTop: "2.5rem", display: "flex", gap: "0.75rem" }}>
                 <Link href="/iletisim" className="btn-primary">
-                  Randevu Al
+                  Randevu Talep Et
                 </Link>
                 <Link href="/hakkimda" className="btn-secondary">
-                  Özgeçmişi İncele
+                  Özgeçmiş
                 </Link>
               </div>
             </div>
@@ -397,10 +397,10 @@ export default function AnasayfaPage() {
               }}
             >
               <p>
-                Marmara Üniversitesi Hukuk Fakültesi mezunu. 2014–2020 yılları arasında Yeditepe Üniversitesi&apos;nde kıdemli avukat olarak 250&apos;den fazla dava yürüttü, 1000&apos;i aşkın sözleşme hazırladı.
+                2008&apos;de Marmara Üniversitesi Hukuk Fakültesi&apos;nden mezun oldu. 2014–2020 yılları arasında Yeditepe Üniversitesi&apos;nde kıdemli avukat olarak kurumun ve bağlı şirketlerinin dava ve sözleşme süreçlerini, KVKK uyum sürecini ve YÖK nezdindeki işlerini yürüttü.
               </p>
               <p style={{ marginTop: "1.5rem" }}>
-                2020&apos;den bu yana serbest avukat olarak vakıf yükseköğretim kurumları, doçentlik davaları ve arabuluculuk alanlarında uzmanlaşmış; 500&apos;ü aşkın arabuluculuk dosyasını anlaşmayla sonuçlandırmıştır.
+                Ekim 2020&apos;den bu yana serbest avukat olarak çalışıyor; 2023&apos;ten beri arabulucu.
               </p>
 
               <div
@@ -544,14 +544,14 @@ export default function AnasayfaPage() {
                 Hukuki sorununuzu birlikte değerlendirelim.
               </h2>
               <p style={{ marginTop: "1.25rem", fontSize: "1rem", lineHeight: 1.75, color: "var(--text-muted)", maxWidth: "34rem" }}>
-                Ücretsiz ön görüşme için formu doldurun veya WhatsApp ile ulaşın. Pazartesi–Cuma 09:00–18:00.
+                Randevu talebi için formu doldurabilir, arayabilir veya WhatsApp ile yazabilirsiniz. Pazartesi–Cuma 09:00–18:00.
               </p>
               <div style={{ display: "flex", flexWrap: "wrap", gap: "0.75rem", marginTop: "2.5rem" }}>
                 <Link href="/iletisim" className="btn-primary">
-                  Randevu Talep Edin
+                  Randevu Talep Et
                 </Link>
                 <a
-                  href="https://api.whatsapp.com/send?phone=905356823872&text=Merhaba"
+                  href={`https://api.whatsapp.com/send?phone=${PHONE.replace("+", "")}&text=Merhaba`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-secondary"
@@ -563,8 +563,8 @@ export default function AnasayfaPage() {
             <div style={{ borderLeft: "1.5px solid var(--border)", paddingLeft: "3rem" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
                 {[
-                  { label: "E-posta", value: "gercekavukatlik@gmail.com", href: "mailto:gercekavukatlik@gmail.com" },
-                  { label: "WhatsApp", value: "+90 535 682 38 72", href: "https://api.whatsapp.com/send?phone=905356823872&text=Merhaba" },
+                  { label: "Telefon", value: PHONE_DISPLAY, href: `tel:${PHONE}` },
+                  { label: "E-posta", value: EMAIL, href: `mailto:${EMAIL}` },
                   { label: "Konum", value: "Kadıköy, İstanbul", href: null },
                   { label: "Çalışma Saatleri", value: "Pzt–Cum 09:00–18:00", href: null },
                 ].map((item) => (

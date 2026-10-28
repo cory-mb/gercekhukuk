@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { PHONE, EMAIL } from "@/lib/schema";
+import { PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 
 const HIZMETLER = [
   { href: "/hizmetler/yuksekogrenim-hukuku", label: "Yükseköğretim Hukuku" },
@@ -65,6 +65,11 @@ export default function Footer() {
               İletişim
             </p>
             <ul style={{ display: "flex", flexDirection: "column", gap: "0.875rem" }}>
+              <li>
+                <a href={`tel:${PHONE}`} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
+                  {PHONE_DISPLAY}
+                </a>
+              </li>
               <li>
                 <a href={`mailto:${EMAIL}`} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.55)", textDecoration: "none" }}>
                   {EMAIL}

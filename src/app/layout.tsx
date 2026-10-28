@@ -8,11 +8,11 @@ import { SITE_URL, SITE_NAME, LAWYER_NAME } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} | ${LAWYER_NAME} - İstanbul`,
-    template: `%s | ${LAWYER_NAME} - İstanbul`,
+    default: `${SITE_NAME} | ${LAWYER_NAME}`,
+    template: `%s | ${SITE_NAME}`,
   },
   description:
-    "Av. Kazım Onur Gerçek LL.M — İstanbul'da yükseköğretim hukuku, doçentlik iptal davaları, iş hukuku, arabuluculuk, kira hukuku ve sözleşmeler hukuku alanlarında uzman avukat.",
+    "Gerçek Hukuk ve Arabuluculuk Bürosu — Av. Kazım Onur Gerçek LL.M. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
   metadataBase: new URL(SITE_URL),
   robots: { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
   verification: {

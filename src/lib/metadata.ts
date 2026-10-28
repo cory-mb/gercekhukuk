@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, SITE_NAME, LAWYER_NAME } from "./schema";
+import { SITE_URL, SITE_NAME } from "./schema";
 
 export function buildMetadata({
   title,
@@ -13,10 +13,11 @@ export function buildMetadata({
   noIndex?: boolean;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
-  const fullTitle = `${title} | ${LAWYER_NAME} - İstanbul`;
+  // Layout title.template site adını ekler; OG/Twitter template almadığı için elle eklenir.
+  const fullTitle = `${title} | ${SITE_NAME}`;
 
   return {
-    title: fullTitle,
+    title,
     description,
     metadataBase: new URL(SITE_URL),
     alternates: { canonical: url },

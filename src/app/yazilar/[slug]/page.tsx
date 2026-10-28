@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | Av. Kazım Onur Gerçek - İstanbul`,
+    title: post.title,
     description: post.description,
     alternates: { canonical: `${SITE_URL}/yazilar/${slug}` },
     openGraph: {
@@ -86,7 +86,7 @@ export default async function BlogPostPage({ params }: Props) {
               </p>
             </div>
             <Link href="/iletisim" className="btn-primary">
-              Ücretsiz Görüşme
+              Randevu Talep Et
             </Link>
           </div>
           <div style={{ marginTop: "1.5rem" }}>
