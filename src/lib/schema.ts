@@ -53,6 +53,26 @@ export function localBusinessSchema() {
   };
 }
 
+export function personSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${SITE_URL}/hakkimda#person`,
+    name: LAWYER_NAME,
+    url: `${SITE_URL}/hakkimda`,
+    image: `${SITE_URL}/kazim-onur-gercek.jpg`,
+    jobTitle: "Avukat ve Arabulucu",
+    worksFor: { "@type": "LegalService", name: SITE_NAME, url: SITE_URL },
+    alumniOf: [
+      { "@type": "CollegeOrUniversity", name: "Marmara Üniversitesi" },
+      { "@type": "CollegeOrUniversity", name: "Gazi Üniversitesi" },
+      { "@type": "CollegeOrUniversity", name: "Yeditepe Üniversitesi" },
+    ],
+    memberOf: { "@type": "Organization", name: "İstanbul 1 No'lu Barosu" },
+    sameAs: ["https://www.linkedin.com/in/kaz%C4%B1m-onur-ger%C3%A7ek-ll-m-213648104"],
+  };
+}
+
 export function breadcrumbSchema(items: { name: string; url: string }[]) {
   return {
     "@context": "https://schema.org",
@@ -104,6 +124,7 @@ export function articleSchema({
     dateModified: dateModified ?? datePublished,
     author: {
       "@type": "Person",
+      "@id": `${SITE_URL}/hakkimda#person`,
       name: LAWYER_NAME,
       url: `${SITE_URL}/hakkimda`,
     },
