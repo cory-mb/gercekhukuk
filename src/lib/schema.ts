@@ -8,6 +8,8 @@ export const PHONE = "+905356823872";
 export const PHONE_DISPLAY = "+90 535 682 38 72";
 export const EMAIL = "gercekavukatlik@gmail.com";
 export const PRACTICE_SINCE = "2009";
+// Google İşletme Profili; yalnız yapısal veride, sayfada görünür link yok (tam konum gösteriyor).
+export const GOOGLE_PROFILE_URL = "https://maps.google.com/?cid=17210828918361439690";
 // Online danışmanlık: owner randevu aracını ve TBB onaylı POS ödeme linkini seçince doldurulur; boşken buton forma gider.
 export const BOOKING_URL = "";
 export const PAYMENT_URL = "";
@@ -28,6 +30,7 @@ export function localBusinessSchema() {
     email: EMAIL,
     image: `${SITE_URL}/og-image.png`,
     logo: `${SITE_URL}/logo.png`,
+    hasMap: GOOGLE_PROFILE_URL,
     founder: {
       "@type": "Person",
       name: LAWYER_NAME,
@@ -54,6 +57,7 @@ export function localBusinessSchema() {
     },
     sameAs: [
       "https://www.linkedin.com/in/kaz%C4%B1m-onur-ger%C3%A7ek-ll-m-213648104",
+      GOOGLE_PROFILE_URL,
     ],
   };
 }
