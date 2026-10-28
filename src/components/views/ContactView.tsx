@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Breadcrumb from "@/components/Breadcrumb";
 import { buildMetadata } from "@/lib/metadata";
-import { BARO_SICIL, EMAIL, KEP, PHONE, PHONE_DISPLAY, PRACTICE_SINCE, TBB_SICIL } from "@/lib/schema";
+import { EMAIL, PHONE, PHONE_DISPLAY, PRACTICE_SINCE } from "@/lib/schema";
 import ContactForm from "@/components/ContactForm";
 import { LINKS, UI, type Lang } from "@/lib/dict";
 
@@ -110,9 +110,6 @@ export default function ContactView({ lang }: { lang: Lang }) {
                 Av. Kazım Onur Gerçek LL.M<br />
                 {c.barText}<br />
                 {c.since}
-                {BARO_SICIL && <><br />Baro sicil no: {BARO_SICIL}</>}
-                {TBB_SICIL && <><br />TBB sicil no: {TBB_SICIL}</>}
-                {KEP && <><br />KEP: {KEP}</>}
               </div>
             </div>
           </aside>

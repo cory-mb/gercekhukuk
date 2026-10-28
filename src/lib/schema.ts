@@ -8,10 +8,6 @@ export const PHONE = "+905356823872";
 export const PHONE_DISPLAY = "+90 535 682 38 72";
 export const EMAIL = "gercekavukatlik@gmail.com";
 export const PRACTICE_SINCE = "2009";
-// Owner'dan gelince doldurulur; boşken sayfada gösterilmez.
-export const BARO_SICIL = "";
-export const TBB_SICIL = "";
-export const KEP = "";
 // Online danışmanlık: owner randevu aracını ve TBB onaylı POS ödeme linkini seçince doldurulur; boşken buton forma gider.
 export const BOOKING_URL = "";
 export const PAYMENT_URL = "";

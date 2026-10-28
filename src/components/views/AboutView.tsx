@@ -4,7 +4,7 @@ import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import { buildMetadata } from "@/lib/metadata";
 import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
-import { BARO_SICIL, KEP, PRACTICE_SINCE, TBB_SICIL, personSchema } from "@/lib/schema";
+import { PRACTICE_SINCE, personSchema } from "@/lib/schema";
 
 const COPY = {
   tr: {
@@ -18,7 +18,7 @@ const COPY = {
       { kurum: "Yeditepe Üniversitesi", bolum: "Özel Hukuk Yüksek Lisansı — LL.M (2020)" },
     ],
     bar: "Baro", barText: "İstanbul 1 No'lu Barosu üyesi",
-    since: `Mesleğe başlama: ${PRACTICE_SINCE}`, mediator: "Arabulucu: 2023'ten bu yana", baroSicil: "Baro sicil no", tbbSicil: "TBB sicil no", kep: "KEP",
+    since: `Mesleğe başlama: ${PRACTICE_SINCE}`, mediator: "Arabulucu: 2023'ten bu yana",
     langTitle: "Yabancı Dil", langText: "İngilizce",
     p1: "Av. Kazım Onur Gerçek, 2008 yılında Marmara Üniversitesi Hukuk Fakültesi'nden mezun oldu. Gazi Üniversitesi'nde Adli Bilişim yüksek lisansını (2015) ve Yeditepe Üniversitesi'nde Özel Hukuk yüksek lisansını (2020) tamamladı.",
     h2: "2009–2014",
@@ -40,7 +40,7 @@ const COPY = {
       { kurum: "Yeditepe University", bolum: "LL.M in Private Law (2020)" },
     ],
     bar: "Bar", barText: "Member of the Istanbul Bar Association",
-    since: `Practising since ${PRACTICE_SINCE}`, mediator: "Mediator since 2023", baroSicil: "Bar registration no.", tbbSicil: "TBB registration no.", kep: "Registered email (KEP)",
+    since: `Practising since ${PRACTICE_SINCE}`, mediator: "Mediator since 2023",
     langTitle: "Languages", langText: "Turkish, English",
     p1: "Av. Kazım Onur Gerçek graduated from Marmara University Faculty of Law in 2008. He completed a master's degree in Forensic Informatics at Gazi University (2015) and an LL.M in Private Law at Yeditepe University (2020).",
     h2: "2009–2014",
@@ -115,9 +115,6 @@ export default function AboutView({ lang }: { lang: Lang }) {
                   <li>{c.barText}</li>
                   <li>{c.since}</li>
                   <li>{c.mediator}</li>
-                  {BARO_SICIL && <li>{c.baroSicil}: {BARO_SICIL}</li>}
-                  {TBB_SICIL && <li>{c.tbbSicil}: {TBB_SICIL}</li>}
-                  {KEP && <li>{c.kep}: {KEP}</li>}
                 </ul>
               </div>
 
