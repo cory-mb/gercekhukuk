@@ -2,32 +2,58 @@
 @import "tailwindcss";
 
 :root {
-  /* Structural */
-  --surface-dark: #111110;
-  --surface-dark-2: #1c1b19;
+  color-scheme: light dark;
 
-  /* Warm editorial palette */
-  --stone: #f2efe9;
-  --stone-2: #e9e5de;
-  --white: #fefcf9;
-  --border: #d4cfc6;
+  /* Footer: her iki modda koyu */
+  --surface-dark: #111111;
+  --surface-dark-2: #1c1c1c;
+
+  /* Monokrom palet (siyah-beyaz logoya uyumlu) */
+  --stone: #f5f5f3;
+  --stone-2: #ebebe8;
+  --white: #ffffff;
+  --border: #d6d6d2;
 
   /* Text */
-  --text: #111110;
-  --text-muted: #655e56;
-  --text-light: #9a9189;
+  --text: #111111;
+  --text-muted: #555555;
+  --text-light: #696969;
 
-  /* Gold accent - thin lines and labels only */
-  --gold: #c9a84c;
-  --gold-light: #d4a843;
-  --gold-muted: #a07830;
+  /* Vurgu: yalnız ince çizgi ve etiket; açık zeminde 4.5:1 kontrast */
+  --gold: #7a5f27;
+  --gold-light: #7a5f27;
+  --gold-muted: #555555;
+  --danger: #b42318;
 
   /* Legacy aliases (used in other pages) */
-  --navy: #1e3a8a;
-  --navy-dark: var(--surface-dark);
-  --navy-light: #2d2c2a;
+  --navy: var(--text);
+  --navy-dark: var(--text);
+  --navy-light: #2d2d2d;
   --cream: var(--stone);
   --muted: var(--stone-2);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-dark: #0b0b0b;
+    --surface-dark-2: #161616;
+    --stone: #121212;
+    --stone-2: #1e1e1e;
+    --white: #181818;
+    --border: #2f2f2f;
+    --text: #ededed;
+    --text-muted: #b0b0b0;
+    --text-light: #8f8f8f;
+    --gold: #c9a84c;
+    --gold-light: #c9a84c;
+    --gold-muted: #b0b0b0;
+    --danger: #ff8a80;
+    --navy-light: #d0d0d0;
+  }
+
+  .logo-img {
+    filter: invert(1);
+  }
 }
 
 html {
@@ -61,7 +87,7 @@ h1, h2 {
   font-family: 'Lato', sans-serif;
   font-size: 1rem;
   line-height: 1.8;
-  color: #1e293b;
+  color: var(--text);
 }
 
 .prose-content h2 {
@@ -189,8 +215,8 @@ h1, h2 {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  background: var(--surface-dark);
-  color: var(--stone);
+  background: var(--text);
+  color: var(--white);
   font-family: 'Lato', sans-serif;
   font-weight: 700;
   font-size: 0.8125rem;
@@ -198,16 +224,20 @@ h1, h2 {
   text-transform: uppercase;
   padding: 0.875rem 2rem;
   border-radius: 0;
-  transition: background 0.2s ease, transform 0.15s ease;
+  transition: opacity 0.2s ease, transform 0.15s ease;
   text-decoration: none;
   cursor: pointer;
-  border: 1.5px solid var(--surface-dark);
+  border: 1.5px solid var(--text);
 }
 
 .btn-primary:hover {
-  background: #2a2926;
-  border-color: #2a2926;
+  opacity: 0.85;
   transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: wait;
 }
 
 .btn-primary:active {
@@ -237,7 +267,7 @@ h1, h2 {
 .btn-secondary:hover {
   border-color: var(--text);
   background: var(--text);
-  color: var(--stone);
+  color: var(--white);
 }
 
 .btn-secondary:active {
@@ -328,7 +358,8 @@ h1, h2 {
 
 /* Dark panel — sidebar CTAs and post-article CTAs */
 .dark-panel {
-  background: var(--surface-dark);
+  background: var(--stone-2);
+  border-top: 1.5px solid var(--gold);
   padding: 1.75rem;
 }
 

@@ -77,10 +77,10 @@ export default async function ServicePage({ params }: Props) {
           <aside className="lg:col-span-1">
             <div className="sticky top-24" style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
               <div className="dark-panel">
-                <p style={{ fontFamily: "'Lato', sans-serif", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(201,168,76,0.7)", marginBottom: "0.75rem" }}>
+                <p style={{ fontFamily: "'Lato', sans-serif", fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--gold)", marginBottom: "0.75rem" }}>
                   {s.title}
                 </p>
-                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.25rem", fontWeight: 500, color: "var(--stone)", lineHeight: 1.3, marginBottom: "1.5rem" }}>
+                <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.25rem", fontWeight: 500, color: "var(--text)", lineHeight: 1.3, marginBottom: "1.5rem" }}>
                   Durumunuzu görüşmek için randevu talep edebilirsiniz.
                 </p>
                 <Link href="/iletisim" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>

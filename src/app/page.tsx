@@ -52,7 +52,7 @@ export default function AnasayfaPage() {
               >
                 Gerçek Hukuk ve
                 <br />
-                <em style={{ fontStyle: "italic", color: "var(--gold-muted)" }}>
+                <em style={{ fontStyle: "italic", color: "var(--text-muted)" }}>
                   Arabuluculuk Bürosu
                 </em>
               </h1>

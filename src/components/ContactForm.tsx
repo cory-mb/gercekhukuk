@@ -90,7 +90,7 @@ export default function ContactForm() {
       </div>
 
       {state?.error && (
-        <p role="alert" className="text-sm" style={{ color: "#b42318" }}>
+        <p role="alert" className="text-sm" style={{ color: "var(--danger)" }}>
           {state.error}
         </p>
       )}
