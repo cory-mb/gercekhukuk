@@ -2,12 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Breadcrumb from "@/components/Breadcrumb";
 import { buildMetadata } from "@/lib/metadata";
-import { getBlogPosts } from "@/lib/content";
+import { formatDate, getBlogPosts } from "@/lib/content";
 
 export const metadata: Metadata = buildMetadata({
   title: "Hukuki Yazılar ve Makaleler",
   description:
-    "Yükseköğretim hukuku, doçentlik davaları, iş hukuku ve arabuluculuk konularında güncel hukuki yazılar. Av. Kazım Onur Gerçek LL.M.",
+    "Doçentlik davaları, yükseköğretim, KVKK ve mevzuata uyum, iş hukuku ve arabuluculuk konularında hukuki yazılar. Av. Kazım Onur Gerçek LL.M.",
   path: "/yazilar",
 });
 
@@ -23,7 +23,7 @@ export default function YazilarPage() {
             Hukuki Yazılar
           </h1>
           <p style={{ marginTop: "0.75rem", color: "var(--text-muted)", fontSize: "0.9375rem", maxWidth: "42rem" }}>
-            Yükseköğretim hukuku, doçentlik davaları, iş hukuku ve arabuluculuk konularında güncel değerlendirmeler.
+            Doçentlik davaları, yükseköğretim, KVKK ve mevzuata uyum, iş hukuku ve arabuluculuk konularında değerlendirmeler.
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@ export default function YazilarPage() {
                 </h2>
                 <p style={{ fontSize: "0.9375rem", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: "1rem" }}>{post.description}</p>
                 <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", flexWrap: "wrap" }}>
-                  <span style={{ fontSize: "0.8125rem", color: "var(--text-light)" }}>{post.date} &nbsp;·&nbsp; {post.readTime}</span>
+                  <span style={{ fontSize: "0.8125rem", color: "var(--text-light)" }}>{formatDate(post.date)} &nbsp;·&nbsp; {post.readTime}</span>
                   <Link
                     href={`/yazilar/${post.slug}`}
                     style={{ fontSize: "0.6875rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-muted)", textDecoration: "none" }}

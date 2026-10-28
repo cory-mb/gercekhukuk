@@ -91,8 +91,40 @@ h1, h2 {
   margin-bottom: 1.25rem;
 }
 
+.prose-content ul { list-style: disc; }
+.prose-content ol { list-style: decimal; }
+.prose-content ol[type="a"] { list-style-type: lower-alpha; }
+
 .prose-content li {
   margin-bottom: 0.5rem;
+}
+
+.prose-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9375rem;
+  display: block;
+  overflow-x: auto;
+}
+
+.prose-content th,
+.prose-content td {
+  border-bottom: 1px solid var(--border);
+  padding: 0.75rem 0.75rem 0.75rem 0;
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose-content th {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.prose-content hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.5rem 0;
 }
 
 .prose-content a {

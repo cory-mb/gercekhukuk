@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Breadcrumb from "@/components/Breadcrumb";
-import { getBlogPost, getBlogSlugs } from "@/lib/content";
+import { formatDate, getBlogPost, getBlogSlugs, getService } from "@/lib/content";
 import { articleSchema, SITE_URL } from "@/lib/schema";
 
 interface Props {
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = getBlogPost(slug);
   if (!post) return {};
   return {
-    title: post.title,
+    title: post.seoTitle ?? post.title,
     description: post.description,
     alternates: { canonical: `${SITE_URL}/yazilar/${slug}` },
     openGraph: {
-      title: post.title,
+      title: post.seoTitle ?? post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
@@ -36,6 +36,7 @@ export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) notFound();
+  const service = post.service ? getService(post.service) : null;
 
   const schema = articleSchema({
     title: post.title,
@@ -53,7 +54,7 @@ export default async function BlogPostPage({ params }: Props) {
           <Breadcrumb
             items={[
               { label: "Yazılar", href: "/yazilar" },
-              { label: post.title },
+              { label: post.title, href: `/yazilar/${slug}` },
             ]}
           />
         </div>
@@ -67,9 +68,9 @@ export default async function BlogPostPage({ params }: Props) {
           {post.title}
         </h1>
         <div style={{ display: "flex", flexWrap: "wrap", gap: "1rem", fontSize: "0.8125rem", color: "var(--text-muted)", marginBottom: "3rem", paddingBottom: "2rem", borderBottom: "1px solid var(--border)" }}>
-          <span>Av. Kazım Onur Gerçek LL.M</span>
+          <Link href="/hakkimda" rel="author" style={{ color: "inherit" }}>Av. Kazım Onur Gerçek LL.M</Link>
           <span style={{ color: "var(--border)" }}>·</span>
-          <span>{post.date}</span>
+          <time dateTime={post.date}>{formatDate(post.date)}</time>
           <span style={{ color: "var(--border)" }}>·</span>
           <span>{post.readTime}</span>
         </div>
@@ -79,11 +80,24 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
 
         <div style={{ marginTop: "4rem", paddingTop: "2.5rem", borderTop: "1px solid var(--border)" }}>
+          <div style={{ marginBottom: "2rem", fontSize: "0.875rem", lineHeight: 1.7, color: "var(--text-muted)" }}>
+            <p style={{ fontWeight: 700, color: "var(--text)", marginBottom: "0.25rem" }}>Yazar hakkında</p>
+            <p>
+              Av. Kazım Onur Gerçek LL.M, 2014–2020 yılları arasında Yeditepe Üniversitesi&apos;nde kıdemli avukat olarak kurumun dava,
+              sözleşme ve KVKK uyum süreçlerini yürüttü. Ekim 2020&apos;den bu yana serbest avukat, 2023&apos;ten bu yana arabulucudur.{" "}
+              <Link href="/hakkimda">Özgeçmiş</Link>
+            </p>
+          </div>
           <div style={{ background: "var(--stone-2)", padding: "2rem", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.5rem" }}>
             <div>
               <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.25rem", fontWeight: 500, color: "var(--text)" }}>
-                Bu konuda hukuki danışmanlık almak ister misiniz?
+                Bu konuda hukuki destek almak ister misiniz?
               </p>
+              {service && (
+                <Link href={`/hizmetler/${service.slug}`} style={{ fontSize: "0.875rem", color: "var(--text-muted)" }}>
+                  İlgili hizmet: {service.title}
+                </Link>
+              )}
             </div>
             <Link href="/iletisim" className="btn-primary">
               Randevu Talep Et
