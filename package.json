@@ -6,7 +6,7 @@
     "dev": "next dev --port 3010",
     "build": "next build",
     "start": "next start --port 3010",
-    "test": "node --test src/lib/hesaplama/"
+    "test": "node --test \"src/**/*.test.ts\""
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
