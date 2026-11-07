@@ -83,7 +83,7 @@ export default function AboutView({ lang }: { lang: Lang }) {
               <div style={{ position: "relative", aspectRatio: "3/4", overflow: "hidden" }}>
                 <div style={{ position: "absolute", inset: "-1.5cm 0 0 0" }}>
                   <Image
-                    src="/kazim-onur-gercek.jpg"
+                    src="/kazim-onur-gercek.png"
                     alt="Av. Kazım Onur Gerçek LL.M"
                     fill
                     style={{ objectFit: "cover", objectPosition: "center top" }}

@@ -3,6 +3,8 @@ import { SERVICE_LINKS } from "./dict";
 export const SITE_URL = "https://www.gercekhukuk.com.tr";
 export const SITE_NAME = "Av. Kazım Onur Gerçek – Avukatlık Bürosu";
 export const SITE_NAME_EN = "Av. Kazım Onur Gerçek – Law Office";
+// <title> ve OG başlıklarında kullanılan kısa site adı (60 karakter sınırı için).
+export const SITE_TITLE = "Gerçek Hukuk Bürosu";
 export const LAWYER_NAME = "Av. Kazım Onur Gerçek LL.M";
 export const PHONE = "+905356823872";
 export const PHONE_DISPLAY = "+90 535 682 38 72";
@@ -69,7 +71,7 @@ export function personSchema() {
     "@id": `${SITE_URL}/hakkimda#person`,
     name: LAWYER_NAME,
     url: `${SITE_URL}/hakkimda`,
-    image: `${SITE_URL}/kazim-onur-gercek.jpg`,
+    image: `${SITE_URL}/kazim-onur-gercek.png`,
     jobTitle: "Avukat ve Arabulucu",
     worksFor: { "@type": "LegalService", name: SITE_NAME, url: SITE_URL },
     alumniOf: [

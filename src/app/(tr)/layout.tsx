@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import "../globals.css";
 import SiteShell from "@/components/SiteShell";
-import { SITE_URL, SITE_NAME } from "@/lib/schema";
+import { SITE_URL, SITE_TITLE } from "@/lib/schema";
 
 export const metadata: Metadata = {
   title: {
-    default: SITE_NAME,
-    template: `%s | ${SITE_NAME}`,
+    default: SITE_TITLE,
+    template: `%s | ${SITE_TITLE}`,
   },
   description:
     "Av. Kazım Onur Gerçek – Avukatlık Bürosu. Avukat ve arabulucu. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     google: "Auz9f-HEQz1Foy533LbNzNTL8cs-_5Z1qUX71nq1yLg",
   },
   openGraph: {
-    siteName: SITE_NAME,
+    siteName: SITE_TITLE,
     locale: "tr_TR",
     type: "website",
   },

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, SITE_NAME, SITE_NAME_EN } from "./schema";
+import { SITE_URL, SITE_TITLE } from "./schema";
 import { getPathPairs } from "./content";
 import type { Lang } from "./dict";
 
@@ -26,12 +26,13 @@ export function buildMetadata({
   lang?: Lang;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
-  // Layout title.template site adını ekler; OG/Twitter template almadığı için elle eklenir.
-  const name = lang === "tr" ? SITE_NAME : SITE_NAME_EN;
-  const fullTitle = `${title} | ${name}`;
+  // Site adı yalnız 60 karaktere sığıyorsa eklenir; sığmıyorsa başlık tek başına kalır (arama sonucunda kesilmesin).
+  const withSite = `${title} | ${SITE_TITLE}`;
+  const fullTitle = [...withSite].length <= 60 ? withSite : title;
+  const name = SITE_TITLE;
 
   return {
-    title,
+    title: { absolute: fullTitle },
     description,
     metadataBase: new URL(SITE_URL),
     alternates: alternatesFor(path, lang),
@@ -58,7 +59,7 @@ export function buildMetadata({
       images: [`${SITE_URL}/og-image.png`],
     },
     robots: noIndex
-      ? { index: false, follow: false }
+      ? { index: false, follow: true }
       : { index: true, follow: true, "max-snippet": -1, "max-image-preview": "large" },
   };
 }

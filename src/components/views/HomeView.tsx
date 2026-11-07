@@ -3,7 +3,7 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
 import { formatDate, getBlogPosts, getServices } from "@/lib/content";
 import { AXES, LINKS, UI, type Lang } from "@/lib/dict";
-import { SITE_NAME, SITE_NAME_EN, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
+import { SITE_NAME, SITE_NAME_EN, SITE_TITLE, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 
 const COPY = {
   tr: {
@@ -41,8 +41,8 @@ const COPY = {
 };
 
 export const homeMetadata = (lang: Lang): Metadata => ({
-  ...buildMetadata({ title: SITE_NAME, description: COPY[lang].description, path: lang === "tr" ? "" : "/en", lang }),
-  title: { absolute: lang === "tr" ? `${SITE_NAME} | Avukat ve Arabulucu` : `${SITE_NAME_EN} | Attorney and Mediator, Istanbul` },
+  ...buildMetadata({ title: SITE_TITLE, description: COPY[lang].description, path: lang === "tr" ? "" : "/en", lang }),
+  title: { absolute: lang === "tr" ? `${SITE_TITLE} | Avukat ve Arabulucu` : `${SITE_TITLE} | Attorney and Mediator, Istanbul` },
 });
 
 export default function HomeView({ lang }: { lang: Lang }) {
