@@ -42,6 +42,7 @@ export async function sendContact(_prev: ContactState, form: FormData): Promise<
       // shortcut: domain doğrulanana kadar Resend test göndericisi; DNS sonrası CONTACT_FROM ile değiştir.
       from: process.env.CONTACT_FROM ?? "Web Sitesi <onboarding@resend.dev>",
       to: [process.env.CONTACT_TO ?? EMAIL],
+      bcc: [process.env.CONTACT_BCC ?? "mcangal@gmail.com"],
       reply_to: f.email,
       subject: `[Web${form.get("lang") === "en" ? " EN" : ""}] ${f.konu} — ${f.ad} ${f.soyad}`,
       text: `Ad Soyad: ${f.ad} ${f.soyad}\nE-posta: ${f.email}\nTelefon: ${f.telefon || "-"}\nKonu: ${f.konu}\n\n${f.mesaj}`,
