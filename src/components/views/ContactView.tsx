@@ -8,18 +8,18 @@ import { LINKS, UI, type Lang } from "@/lib/dict";
 const COPY = {
   tr: {
     title: "İletişim ve Randevu Talebi",
-    description: "Av. Kazım Onur Gerçek – Avukatlık Bürosu ile iletişim: randevu talep formu, telefon, e-posta ve WhatsApp. Pazartesi–Cuma 09:00–18:00.",
+    description: "Gerçek Hukuk ve Arabuluculuk Bürosu ile iletişim: randevu talep formu, telefon, e-posta ve WhatsApp. Pazartesi–Cuma 09:00–18:00.",
     intro: "Randevu talebiniz için formu doldurabilir, arayabilir veya WhatsApp üzerinden yazabilirsiniz.",
-    info: "İletişim Bilgileri", address: "Adres", addressValue: "Kadıköy, İstanbul / Türkiye", hours: "Çalışma Saatleri",
+    info: "İletişim Bilgileri", address: "Adres", addressValue: "Erenköy, Kadıköy, İstanbul / Türkiye", hours: "Çalışma Saatleri",
     wa: "WhatsApp ile Yaz", waSub: "Hızlı yanıt için tercih edin",
     onlinePre: "Büroya gelemiyorsanız", onlineLink: "online danışmanlık", onlinePost: "seçeneğine bakabilirsiniz.",
     bar: "Baro Bilgileri", barText: "İstanbul 1 No'lu Barosu üyesi", since: `Mesleğe başlama: ${PRACTICE_SINCE}`,
   },
   en: {
     title: "Contact and Appointments",
-    description: "Contact Av. Kazım Onur Gerçek – Law Office in Istanbul: appointment request form, phone, email and WhatsApp. Monday–Friday 09:00–18:00.",
+    description: "Contact Gerçek Hukuk ve Arabuluculuk Bürosu in Istanbul: appointment request form, phone, email and WhatsApp. Monday–Friday 09:00–18:00.",
     intro: "To request an appointment, fill in the form, call or write to us on WhatsApp. We work in Turkish and English.",
-    info: "Contact Details", address: "Address", addressValue: "Kadıköy, Istanbul / Turkey", hours: "Office Hours",
+    info: "Contact Details", address: "Address", addressValue: "Erenköy, Kadıköy, Istanbul / Turkey", hours: "Office Hours",
     wa: "Write on WhatsApp", waSub: "Usually the quickest way to reach us",
     onlinePre: "If you cannot visit the office, see", onlineLink: "online consultation", onlinePost: ".",
     bar: "Bar Membership", barText: "Member of the Istanbul Bar Association", since: `Practising since ${PRACTICE_SINCE}`,

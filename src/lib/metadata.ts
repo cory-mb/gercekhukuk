@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { SITE_URL, SITE_TITLE } from "./schema";
+import { SITE_URL, SITE_NAME } from "./schema";
 import { getPathPairs } from "./content";
 import type { Lang } from "./dict";
 
@@ -27,9 +27,9 @@ export function buildMetadata({
 }): Metadata {
   const url = `${SITE_URL}${path}`;
   // Site adı yalnız 60 karaktere sığıyorsa eklenir; sığmıyorsa başlık tek başına kalır (arama sonucunda kesilmesin).
-  const withSite = `${title} | ${SITE_TITLE}`;
+  const withSite = `${title} | ${SITE_NAME}`;
   const fullTitle = [...withSite].length <= 60 ? withSite : title;
-  const name = SITE_TITLE;
+  const name = SITE_NAME;
 
   return {
     title: { absolute: fullTitle },

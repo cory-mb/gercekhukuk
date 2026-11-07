@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
-import { SITE_NAME, SITE_NAME_EN } from "@/lib/schema";
+import { SITE_NAME } from "@/lib/schema";
 
 // pairs: [trYolu, enYolu] — layout sunucuda içerikten üretir, burada dil değiştirici için kullanılır.
 export default function Header({ lang, pairs }: { lang: Lang; pairs: [string, string][] }) {
@@ -36,7 +36,7 @@ export default function Header({ lang, pairs }: { lang: Lang; pairs: [string, st
           <Link href={L.home} className="flex items-center">
             <Image
               src="/logo.png"
-              alt={lang === "tr" ? SITE_NAME : SITE_NAME_EN}
+              alt={SITE_NAME}
               width={160}
               height={48}
               priority

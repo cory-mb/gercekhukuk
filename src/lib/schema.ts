@@ -1,10 +1,8 @@
 import { SERVICE_LINKS } from "./dict";
 
 export const SITE_URL = "https://www.gercekhukuk.com.tr";
-export const SITE_NAME = "Av. Kazım Onur Gerçek – Avukatlık Bürosu";
-export const SITE_NAME_EN = "Av. Kazım Onur Gerçek – Law Office";
-// <title> ve OG başlıklarında kullanılan kısa site adı (60 karakter sınırı için).
-export const SITE_TITLE = "Gerçek Hukuk Bürosu";
+// Büro adı TR ve EN'de aynı (özel ad). <title>, OG, şema ve alt bilgi buradan beslenir.
+export const SITE_NAME = "Gerçek Hukuk ve Arabuluculuk Bürosu";
 export const LAWYER_NAME = "Av. Kazım Onur Gerçek LL.M";
 export const PHONE = "+905356823872";
 export const PHONE_DISPLAY = "+90 535 682 38 72";
@@ -15,8 +13,9 @@ export const GOOGLE_PROFILE_URL = "https://maps.google.com/?cid=1721082891836143
 // Online danışmanlık: owner randevu aracını ve TBB onaylı POS ödeme linkini seçince doldurulur; boşken buton forma gider.
 export const BOOKING_URL = "";
 export const PAYMENT_URL = "";
-// Owner istemiyor: sokak/posta kodu/koordinat yok, yalnız ilçe düzeyi.
+// Owner (2026-11-07): yalnız mahalle düzeyi görünür; sokak/posta kodu/koordinat yok.
 export const ADDRESS = {
+  streetAddress: "Erenköy",
   addressLocality: "Kadıköy",
   addressRegion: "İstanbul",
   addressCountry: "TR",

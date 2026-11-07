@@ -3,36 +3,36 @@ import Link from "next/link";
 import { buildMetadata } from "@/lib/metadata";
 import { formatDate, getBlogPosts, getServices } from "@/lib/content";
 import { AXES, LINKS, UI, type Lang } from "@/lib/dict";
-import { SITE_NAME, SITE_NAME_EN, SITE_TITLE, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
+import { SITE_NAME, PHONE, PHONE_DISPLAY, EMAIL } from "@/lib/schema";
 
 const COPY = {
   tr: {
-    description: "Av. Kazım Onur Gerçek – Avukatlık Bürosu. Avukat ve arabulucu. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
-    kicker: "Avukat · Arabulucu",
-    h1a: "Av. Kazım Onur Gerçek", h1b: "Avukatlık Bürosu",
+    description: "Gerçek Hukuk ve Arabuluculuk Bürosu. Av. Kazım Onur Gerçek, avukat ve arabulucu. Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma.",
+    kicker: "Av. Kazım Onur Gerçek · Avukat · Arabulucu",
+    h1a: "Gerçek Hukuk ve", h1b: "Arabuluculuk Bürosu",
     lead: "Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, hukukta iş geliştirme ve kurumsallaşma. İstanbul 1 No'lu Barosu.",
     areasLabel: "Çalışma Alanları", areasH2: "Hangi konuda yardım almak istiyorsunuz?", seeAll: "Tümünü Gör",
     creds: ["Marmara Ünv. Hukuk Fakültesi", "Yeditepe Ünv. Özel Hukuk LL.M", "Gazi Ünv. Adli Bilişim Y.L.", "İstanbul 1 No'lu Baro Üyesi"],
     cv: "Özgeçmiş",
     bio1: "2008'de Marmara Üniversitesi Hukuk Fakültesi'nden mezun oldu, 2009'dan bu yana avukat. 2014–2020 yılları arasında bir vakıf üniversitesinde kıdemli avukat olarak kurumun dava ve sözleşme süreçlerini, KVKK uyum sürecini ve YÖK nezdindeki işlerini yürüttü.",
     bio2: "Ekim 2020'den bu yana serbest avukat olarak çalışıyor; 2023'ten beri arabulucu.",
-    place: "Kadıköy, İstanbul — Pazartesi–Cuma 09:00–18:00",
+    place: "Erenköy, Kadıköy, İstanbul — Pazartesi–Cuma 09:00–18:00",
     postsLabel: "Hukuki Değerlendirmeler", postsH2: "Son Yazılar",
     ctaH2: "Randevu ve İletişim",
     ctaText: "Randevu talebi için formu doldurabilir, arayabilir veya WhatsApp ile yazabilirsiniz. Pazartesi–Cuma 09:00–18:00.",
     wa: "WhatsApp ile Yazın", location: "Konum", hours: "Çalışma Saatleri",
   },
   en: {
-    description: "Av. Kazım Onur Gerçek – Law Office, Istanbul. Attorney and mediator. Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation.",
-    kicker: "Attorney · Mediator",
-    h1a: "Av. Kazım Onur Gerçek", h1b: "Law Office",
+    description: "Gerçek Hukuk ve Arabuluculuk Bürosu, Istanbul. Av. Kazım Onur Gerçek, attorney and mediator. Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation.",
+    kicker: "Av. Kazım Onur Gerçek · Attorney · Mediator",
+    h1a: "Gerçek Hukuk ve", h1b: "Arabuluculuk Bürosu",
     lead: "Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation. Istanbul Bar Association.",
     areasLabel: "Practice Areas", areasH2: "How can we help?", seeAll: "View all",
     creds: ["Marmara University, Faculty of Law", "Yeditepe University, LL.M in Private Law", "Gazi University, MSc Forensic Informatics", "Member of the Istanbul Bar"],
     cv: "Profile",
     bio1: "Graduated from Marmara University Faculty of Law in 2008 and has practised law since 2009. From 2014 to 2020 he was senior counsel at a foundation university, handling its litigation and contracts, data protection compliance and proceedings before the Council of Higher Education.",
     bio2: "In independent practice since October 2020; mediator since 2023.",
-    place: "Kadıköy, Istanbul — Monday–Friday 09:00–18:00",
+    place: "Erenköy, Kadıköy, Istanbul — Monday–Friday 09:00–18:00",
     postsLabel: "Legal Notes", postsH2: "Latest Articles",
     ctaH2: "Appointments and Contact",
     ctaText: "To request an appointment, fill in the contact form, call or write on WhatsApp. Monday–Friday 09:00–18:00 (Istanbul time).",
@@ -41,8 +41,8 @@ const COPY = {
 };
 
 export const homeMetadata = (lang: Lang): Metadata => ({
-  ...buildMetadata({ title: SITE_TITLE, description: COPY[lang].description, path: lang === "tr" ? "" : "/en", lang }),
-  title: { absolute: lang === "tr" ? `${SITE_TITLE} | Avukat ve Arabulucu` : `${SITE_TITLE} | Attorney and Mediator, Istanbul` },
+  ...buildMetadata({ title: SITE_NAME, description: COPY[lang].description, path: lang === "tr" ? "" : "/en", lang }),
+  title: { absolute: `${SITE_NAME} | Av. Kazım Onur Gerçek` },
 });
 
 export default function HomeView({ lang }: { lang: Lang }) {
