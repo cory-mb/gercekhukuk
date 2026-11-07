@@ -34,3 +34,7 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Slug kuralı
+
+Tüm sayfa, hizmet ve yazı URL'leri ASCII, küçük harf ve tire ayraçlıdır (`ş→s`, `ğ→g`, `ı→i`, `ö→o`, `ü→u`, `ç→c`). İçerik dosya adı URL slug'ıdır; `npm test` kurala uymayan dosya adlarını yakalar. Eski Wix URL'leri `next.config.ts` içinde 301 ile yeni slug'lara gider.
