@@ -14,7 +14,7 @@ export const LINKS = {
 
 export const SERVICE_LINKS = {
   tr: [
-    { href: "/hizmetler/yuksekogrenim-hukuku", label: "Vakıf Üniversiteleri Uyuşmazlıkları" },
+    { href: "/hizmetler/yuksekogrenim-hukuku", label: "Yükseköğretim Hukuku" },
     { href: "/hizmetler/docentlik-iptal-davalari", label: "Doçentlik İptal Davaları" },
     { href: "/hizmetler/is-hukuku", label: "İş Hukuku" },
     { href: "/hizmetler/sirketler-hukuku-ve-sozlesme-yonetimi", label: "Şirketler Hukuku ve Sözleşme Yönetimi" },
