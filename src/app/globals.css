@@ -159,6 +159,11 @@ h1, h2 {
   text-underline-offset: 2px;
 }
 
+/* Buttons inside prose: keep button colors, not link colors */
+.prose-content a.btn-primary { color: var(--white); text-decoration: none; }
+.prose-content a.btn-secondary { color: var(--text); text-decoration: none; }
+.prose-content a.btn-secondary:hover { color: var(--white); }
+
 .prose-content blockquote {
   border-left: 3px solid var(--gold);
   padding-left: 1.25rem;

@@ -106,24 +106,25 @@ export default function Header({ lang, pairs }: { lang: Lang; pairs: [string, st
               href={L.contact}
               style={{
                 marginLeft: "0.75rem",
-                padding: "0.5rem 1.25rem",
-                fontSize: "0.6875rem",
+                padding: "0.625rem 1.5rem",
+                fontSize: "0.75rem",
                 fontWeight: 700,
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 border: "1px solid var(--text)",
-                color: "var(--text)",
+                background: "var(--text)",
+                color: "var(--white)",
                 textDecoration: "none",
                 transition: "all 0.2s ease",
                 whiteSpace: "nowrap",
               }}
               onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "var(--text)";
-                (e.currentTarget as HTMLAnchorElement).style.color = "var(--white)";
-              }}
-              onMouseLeave={(e) => {
                 (e.currentTarget as HTMLAnchorElement).style.background = "transparent";
                 (e.currentTarget as HTMLAnchorElement).style.color = "var(--text)";
+              }}
+              onMouseLeave={(e) => {
+                (e.currentTarget as HTMLAnchorElement).style.background = "var(--text)";
+                (e.currentTarget as HTMLAnchorElement).style.color = "var(--white)";
               }}
             >
               {t.cta}
