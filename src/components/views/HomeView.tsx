@@ -79,7 +79,7 @@ export default function HomeView({ lang }: { lang: Lang }) {
                   fontFamily: "'EB Garamond', Georgia, serif",
                   fontSize: "clamp(3rem, 7vw, 5.25rem)",
                   lineHeight: 1.07,
-                  fontWeight: 500,
+                  fontWeight: 700,
                   color: "var(--text)",
                   letterSpacing: "-0.025em",
                 }}
