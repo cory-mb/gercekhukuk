@@ -73,6 +73,7 @@ export default function BlogPostView({ lang, slug }: { lang: Lang; slug: string 
             <p>
               {t.authorBio} <Link href={L.about}>{t.cv}</Link>
             </p>
+            <p style={{ marginTop: "1rem", fontSize: "0.8125rem" }}>{t.copyright}</p>
           </div>
           <div style={{ background: "var(--stone-2)", padding: "2rem", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.5rem" }}>
             <div>
