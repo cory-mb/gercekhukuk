@@ -1,0 +1,393 @@
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Gerçek Hukuk Paneli</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Lato:wght@400;700&display=swap">
+<style>
+/* Layout: büro defteri. KPI şeridi, ardından her soru için bir bölüm (müvekkil → SEO → keyword → içerik → kitle), ayrıntı tablolarda.
+   Marka: gercekhukuk.com.tr ile aynı siyah-beyaz palet, EB Garamond başlık, Lato metin, ince altın vurgu. */
+:root {
+  --bg: #f5f5f3; --surface: #ffffff; --line: #d6d6d2; --fg: #111111; --muted: #555555; --faint: #696969;
+  --accent: #7a5f27; --accent-soft: #ebe5d6; --bar: #1f1f1f; --bar-dim: #c4c4bf; --track: #ebebe8;
+  --good: #1a7f37; --good-bg: #e2f3e6; --warn: #8a5a00; --warn-bg: #fbefd5; --bad: #b42318; --bad-bg: #fbe4e1;
+  --serif: "EB Garamond", Georgia, "Times New Roman", serif; --sans: "Lato", system-ui, -apple-system, sans-serif;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #121212; --surface: #181818; --line: #2f2f2f; --fg: #ededed; --muted: #b0b0b0; --faint: #8f8f8f;
+  --accent: #c9a84c; --accent-soft: #2a2412; --bar: #dcdcd8; --bar-dim: #4a4a47; --track: #1e1e1e;
+  --good: #5fcf7e; --good-bg: #173322; --warn: #e2b04a; --warn-bg: #3a2e14; --bad: #f2867a; --bad-bg: #3d1d1a; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #121212; --surface: #181818; --line: #2f2f2f; --fg: #ededed; --muted: #b0b0b0; --faint: #8f8f8f;
+  --accent: #c9a84c; --accent-soft: #2a2412; --bar: #dcdcd8; --bar-dim: #4a4a47; --track: #1e1e1e;
+  --good: #5fcf7e; --good-bg: #173322; --warn: #e2b04a; --warn-bg: #3a2e14; --bad: #f2867a; --bad-bg: #3d1d1a; color-scheme: dark }
+[hidden]:not([hidden=until-found i]) { display: none !important; }
+body { background: var(--bg); color: var(--fg); font: 14px/1.5 var(--sans); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--bg); }
+.wrap { max-width: 1180px; margin: 0 auto; padding-block: 28px 64px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: grid; gap: 40px; }
+h1, h2 { font-family: var(--serif); font-weight: 600; text-wrap: balance; margin: 0; letter-spacing: -.01em; }
+h1 { font-size: 30px; line-height: 1.15; } h2 { font-size: 24px; line-height: 1.2; }
+h3 { font-size: 12px; font-weight: 700; margin: 0 0 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+header.top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 14px 24px; align-items: end; border-bottom: 1px solid var(--line); padding-bottom: 16px; }
+.brand { display: grid; gap: 10px; }
+.logo { display: block; height: 34px; width: auto; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .logo { filter: invert(1); } }
+:root[data-theme="dark"] .logo { filter: invert(1); }
+.meta { color: var(--muted); font-size: 12.5px; }
+.top-r { display: grid; gap: 8px; justify-items: end; text-align: right; }
+.btn { font: 700 12.5px var(--sans); color: var(--fg); background: var(--surface); border: 1px solid var(--fg); padding: 6px 12px; cursor: pointer; }
+.btn:hover { background: var(--fg); color: var(--bg); }
+.btn:focus-visible, nav.jump a:focus-visible, details summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+nav.jump { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); display: flex; gap: 6px; flex-wrap: wrap; padding: 8px 0; margin: -28px 0 -24px; }
+nav.jump a { color: var(--fg); text-decoration: none; font-weight: 700; font-size: 13px; padding: 4px 12px; border-radius: 99px; border: 1px solid var(--line); background: var(--surface); }
+nav.jump a:hover { border-color: var(--accent); color: var(--accent); }
+#content { display: grid; gap: 40px; min-width: 0; }
+section { display: grid; gap: 18px; scroll-margin-top: 56px; min-width: 0; }
+.sec-head { display: grid; gap: 4px; }
+.sec-head p { margin: 0; color: var(--muted); max-width: 70ch; }
+.kpi-wrap { display: grid; gap: 10px; }
+.kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); overflow: hidden; }
+.kpi { background: var(--surface); padding: 14px 16px; display: grid; gap: 2px; align-content: start; }
+.kpi .lbl { font-size: 12px; color: var(--muted); font-weight: 700; }
+.kpi .val { font: 600 28px/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+.delta { font-size: 12px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.up { color: var(--good); } .down { color: var(--bad); } .flat { color: var(--faint); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); gap: 18px; }
+.panel { background: var(--surface); border: 1px solid var(--line); padding: 16px; min-width: 0; }
+.note { background: var(--warn-bg); border-left: 3px solid var(--warn); padding: 10px 14px; font-size: 13px; }
+.note b { color: var(--warn); }
+.fine { margin: 10px 0 0; color: var(--faint); font-size: 12px; }
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+.chart text { fill: var(--muted); font: 10.5px var(--sans); font-variant-numeric: tabular-nums; }
+.chart .grid { stroke: var(--line); stroke-width: 1; }
+.chart .b { fill: var(--bar); } .chart .b.dim { fill: var(--bar-dim); }
+.chart rect.hit { fill: transparent; cursor: default; }
+.chart g.col:hover .b { fill: var(--accent); }
+.tip { position: absolute; pointer-events: none; background: var(--fg); color: var(--bg); font-size: 12px; padding: 6px 9px; white-space: nowrap; transform: translate(-50%, -110%); font-variant-numeric: tabular-nums; }
+.tbl { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 13px; }
+th { text-align: left; font-size: 11.5px; color: var(--muted); font-weight: 700; padding: 6px 8px; border-bottom: 1px solid var(--fg); white-space: nowrap; }
+td { padding: 7px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+tr:last-child td { border-bottom: 0; }
+th.n, td.n { text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.path { word-break: break-all; min-width: 200px; }
+td.path small { color: var(--faint); }
+.pill { display: inline-block; font-size: 11px; font-weight: 700; padding: 1px 8px; border-radius: 99px; white-space: nowrap; }
+.pill.good { color: var(--good); background: var(--good-bg); } .pill.warn { color: var(--warn); background: var(--warn-bg); } .pill.bad { color: var(--bad); background: var(--bad-bg); }
+.hbar { display: grid; grid-template-columns: minmax(90px, 32%) 1fr auto; gap: 8px; align-items: center; font-size: 13px; padding: 3px 0; }
+.hbar .track { height: 10px; background: var(--track); overflow: hidden; }
+.hbar .fill { height: 100%; background: var(--bar); }
+.hbar .num { font-variant-numeric: tabular-nums; }
+details summary { cursor: pointer; font-weight: 700; }
+details ul { margin: 6px 0 4px; padding-left: 18px; color: var(--muted); font-size: 12.5px; }
+.legend { display: flex; gap: 14px; font-size: 12px; color: var(--muted); margin-top: 6px; flex-wrap: wrap; }
+.legend i { display: inline-block; width: 10px; height: 10px; margin-right: 5px; vertical-align: -1px; }
+.sample { background: var(--warn-bg); border: 1px solid var(--warn); color: var(--fg); padding: 10px 14px; font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; }
+.sample b { color: var(--warn); }
+.empty { display: grid; gap: 14px; max-width: 70ch; }
+.empty p { margin: 0; color: var(--muted); }
+.empty ul { margin: 0; padding-left: 18px; color: var(--muted); }
+.empty .btn { justify-self: start; }
+footer { color: var(--faint); font-size: 12px; }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <img class="logo" src="__LOGO__" alt="Gerçek Hukuk ve Arabuluculuk Bürosu" width="113" height="34">
+      <div><h1>Gerçek Hukuk Paneli</h1><div class="meta">gercekhukuk.com.tr · Search Console + GA4</div></div>
+    </div>
+    <div class="top-r"><div class="meta" id="ranges"></div></div>
+  </header>
+
+  <div class="sample" id="sample" hidden>
+    <span><b>Örnek veri.</b> Bu sayılar gerçek ölçüm değildir; yalnızca panelin görünümünü göstermek için üretildi.</span>
+    <button class="btn" type="button" id="sampleOff">Örnek veriyi kapat</button>
+  </div>
+
+  <div class="empty" id="empty" hidden>
+    <h2>Veri henüz bağlanmadı</h2>
+    <p>Bu panel Google Search Console ve GA4 çıktısını gösterir. Şu an içinde ölçüm yok, bu yüzden hiçbir sayı gösterilmiyor.</p>
+    <ul>
+      <li>GA4 ve olaylar (<code>whatsapp_click</code>, <code>contact_form_sent</code>) kodda hazır; sitede çalışması için Vercel'de <code>NEXT_PUBLIC_GA_ID</code> tanımlı olmalı.</li>
+      <li>Search Console verisi gercekhukuk.com.tr mülkünden alınır, 3 gün gecikmelidir.</li>
+      <li>Veri geldiğinde panel aynı düzenle dolar: müvekkil adayı aksiyonları, organik arama, hizmet keyword grupları, içerik, kitle.</li>
+    </ul>
+    <button class="btn" type="button" id="sampleOn">Örnek veriyle önizle</button>
+  </div>
+
+  <nav class="jump" aria-label="Bölümler" id="jump" hidden><a href="#musteri">Müvekkil adayı</a><a href="#seo">SEO</a><a href="#keyword">Hizmet keyword'leri</a><a href="#icerik">İçerik</a><a href="#kitle">Kitle</a></nav>
+
+  <div id="content" hidden>
+    <div class="kpi-wrap" id="kpis"></div>
+
+    <section id="musteri">
+      <div class="sec-head"><h2>Müvekkil adayı</h2><p>WhatsApp ve iletişim formu aksiyonları. Hangi kanal ve sayfa görüşme talebi getiriyor?</p></div>
+      <div class="note" id="trackNote"></div>
+      <div class="grid2">
+        <div class="panel"><h3>Haftalık müvekkil adayı aksiyonu</h3><div class="chart" id="chLeads"></div></div>
+        <div class="panel"><h3>Son 28 gün, aksiyon türü</h3><div id="leadTypes"></div><p class="fine">WhatsApp (giden link) ve WhatsApp tıklama aynı tıklamayı iki kez sayabilir. Toplam aksiyonda ikisinden yüksek olan alınır.</p></div>
+      </div>
+      <div class="panel"><h3>Kanallar · son 28 gün</h3><div class="tbl"><table id="tChannels"></table></div></div>
+      <div class="panel"><h3>Giriş sayfaları · son 28 gün</h3><div class="tbl"><table id="tLanding"></table></div></div>
+    </section>
+
+    <section id="seo">
+      <div class="sec-head"><h2>Organik arama</h2><p>Google Search Console. Veri 3 gün gecikmeli; haftalar son veri gününe göre 7 günlük dilimler.</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>Haftalık tıklama</h3><div class="chart" id="chClicks"></div></div>
+        <div class="panel"><h3>Haftalık gösterim</h3><div class="chart" id="chImpr"></div></div>
+      </div>
+      <div class="panel"><h3>İzlenen URL'ler</h3><div class="tbl"><table id="tTracked"></table></div></div>
+    </section>
+
+    <section id="keyword">
+      <div class="sec-head"><h2>Hizmet keyword grupları</h2><p>Sorgular hizmet alanına göre toplandı. Satıra tıkla, en çok tıklanan sorguları gör.</p></div>
+      <div class="panel"><div class="tbl"><table id="tGroups"></table></div></div>
+      <div class="panel"><h3>Fırsatlar · 3–15. sıra, düşük CTR</h3><div class="tbl"><table id="tOpps"></table></div></div>
+    </section>
+
+    <section id="icerik">
+      <div class="sec-head"><h2>İçerik performansı</h2><p>Sayfa bazında organik tıklama ve önceki 28 güne göre değişim.</p></div>
+      <div class="panel"><div class="tbl"><table id="tPages"></table></div></div>
+    </section>
+
+    <section id="kitle">
+      <div class="sec-head"><h2>Kitle</h2><p>Ziyaretçilerin şehir ve cihaz dağılımı. Online danışmanlık nedeniyle İstanbul dışından gelen trafik de müvekkil adayı olabilir.</p></div>
+      <div class="grid2">
+        <div class="panel"><h3>Şehir · oturum</h3><div id="city"></div></div>
+        <div class="panel"><h3>Cihaz · oturum</h3><div id="device"></div></div>
+      </div>
+    </section>
+  </div>
+
+  <footer id="foot"></footer>
+</div>
+
+<script>
+// Gerçek veri geldiğinde buraya aynı biçimde yazılır (gsc + ga). null ise boş durum gösterilir.
+const DATA = /*__DATA__*/null;
+
+const $ = id => document.getElementById(id);
+const nf = new Intl.NumberFormat("tr-TR");
+const fmt = n => n == null ? "–" : nf.format(Math.round(n));
+const pct = (n, d = 1) => (n * 100).toLocaleString("tr-TR", { minimumFractionDigits: d, maximumFractionDigits: d }) + "%";
+const dshort = s => new Date(s + "T00:00").toLocaleDateString("tr-TR", { day: "numeric", month: "short" });
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function delta(cur, prev, { invert = false, asPts = false } = {}) {
+  if (prev == null || cur == null) return '<span class="delta flat">yeni</span>';
+  if (!prev && !cur) return '<span class="delta flat">–</span>';
+  let v, txt;
+  if (asPts) { v = cur - prev; txt = (v > 0 ? "+" : "") + v.toLocaleString("tr-TR", { maximumFractionDigits: 1 }); }
+  else if (!prev) return '<span class="delta up">yeni</span>';
+  else { v = (cur - prev) / prev; txt = (v > 0 ? "+" : "") + Math.round(v * 100) + "%"; }
+  const good = invert ? v < 0 : v > 0;
+  const cls = Math.abs(asPts ? v : v * 100) < (asPts ? 0.15 : 3) ? "flat" : good ? "up" : "down";
+  return `<span class="delta ${cls}">${txt}</span>`;
+}
+// WhatsApp giden link ile whatsapp_click aynı tıklamayı sayabilir: yüksek olan alınır, form eklenir.
+const leads = k => Math.max(k.waOutbound || 0, k.events.whatsapp_click || 0) + (k.events.contact_form_sent || 0);
+
+// ---- bar chart (single series, one scale) ----
+function bars(el, rows, key, { dimBefore, label } = {}) {
+  const W = 520, H = 190, L = 34, B = 22, T = 8, iw = W - L - 6, ih = H - B - T;
+  const max = Math.max(1, ...rows.map(r => r[key]));
+  const step = Math.pow(10, Math.floor(Math.log10(max)));
+  const tick = [1, 2, 2.5, 5, 10].map(m => m * step).find(t => max / t <= 4);
+  const top = Math.ceil(max / tick) * tick, y = v => T + ih - v / top * ih;
+  const bw = iw / rows.length, gap = Math.min(2, bw * .2);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}">`;
+  for (let t = 0; t <= top + 1e-9; t += tick) s += `<line class="grid" x1="${L}" x2="${W - 6}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 3.5}" text-anchor="end">${fmt(t)}</text>`;
+  rows.forEach((r, i) => {
+    const x = L + i * bw, h = Math.max(0, ih - (y(r[key]) - T)), r4 = Math.min(3, (bw - gap) / 2, h);
+    const dim = dimBefore && r.week < dimBefore ? " dim" : "";
+    const bx = x + gap / 2, bwid = bw - gap, by = T + ih - h;
+    const path = h ? `M${bx},${T + ih}V${by + r4}Q${bx},${by} ${bx + r4},${by}H${bx + bwid - r4}Q${bx + bwid},${by} ${bx + bwid},${by + r4}V${T + ih}Z` : "";
+    s += `<g class="col" data-i="${i}"><path d="${path}" class="b${dim}"/><rect class="hit" x="${x}" y="${T}" width="${bw}" height="${ih}"/></g>`;
+    if (i % 4 === (rows.length - 1) % 4) s += `<text x="${x + bw / 2}" y="${H - 6}" text-anchor="middle">${dshort(r.week)}</text>`;
+  });
+  el.innerHTML = s + "</svg>";
+  const tip = document.createElement("div"); tip.className = "tip"; tip.hidden = true; el.appendChild(tip);
+  el.querySelectorAll("g.col").forEach(g => {
+    const r = rows[g.dataset.i];
+    g.addEventListener("mouseenter", () => {
+      const box = el.getBoundingClientRect(), hb = g.querySelector("rect.hit").getBoundingClientRect();
+      tip.innerHTML = `${dshort(r.week)} haftası · <b>${fmt(r[key])}</b> ${label}`;
+      tip.style.left = (hb.left - box.left + hb.width / 2) + "px"; tip.style.top = (hb.top - box.top + 30) + "px"; tip.hidden = false;
+    });
+    g.addEventListener("mouseleave", () => tip.hidden = true);
+  });
+}
+function hbars(el, rows, nameKey, valKey) {
+  const max = Math.max(1, ...rows.map(r => r[valKey]));
+  const total = rows.reduce((a, r) => a + r[valKey], 0) || 1;
+  el.innerHTML = rows.map(r => `<div class="hbar"><span>${esc(r[nameKey])}</span><div class="track"><div class="fill" style="width:${r[valKey] / max * 100}%"></div></div><span class="num">${fmt(r[valKey])} <small style="color:var(--faint)">${pct(r[valKey] / total, 0)}</small></span></div>`).join("");
+}
+const table = (el, head, rows) => el.innerHTML = `<thead><tr>${head.map(h => `<th class="${h[1] || ""}">${h[0]}</th>`).join("")}</tr></thead><tbody>${rows.join("") || `<tr><td colspan="${head.length}" style="color:var(--faint)">Veri yok</td></tr>`}</tbody>`;
+const label = p => { if (p === "/") return "/ <small>ana sayfa</small>"; try { return esc(decodeURI(p)); } catch { return esc(p); } };
+
+function render(D, sample) {
+  const g = D.gsc, a = D.ga, gk = g.kpi, ak = a.kpi;
+  $("ranges").innerHTML = `Son 28 gün: GSC ${dshort(g.range.cur[0])}–${dshort(g.range.cur[1])} · GA4 ${dshort(a.range.cur[0])}–${dshort(a.range.cur[1])}<br>Karşılaştırma: önceki 28 gün`;
+
+  const leadsCur = leads(ak.cur), leadsPrev = leads(ak.prev);
+  const k = [
+    ["Müvekkil adayı aksiyonu", fmt(leadsCur), delta(leadsCur, leadsPrev)],
+    ["Oturum", fmt(ak.cur.sessions), delta(ak.cur.sessions, ak.prev.sessions)],
+    ["Etkileşim oranı", pct(ak.cur.engagedSessions / ak.cur.sessions), delta(ak.cur.engagedSessions / ak.cur.sessions * 100, ak.prev.engagedSessions / ak.prev.sessions * 100, { asPts: true }) + ' <small class="flat">puan</small>'],
+    ["Organik tıklama", fmt(gk.cur.clicks), delta(gk.cur.clicks, gk.prev.clicks)],
+    ["Gösterim", fmt(gk.cur.impressions), delta(gk.cur.impressions, gk.prev.impressions)],
+    ["CTR", pct(gk.cur.ctr, 2), delta(gk.cur.ctr * 100, gk.prev.ctr * 100, { asPts: true }) + ' <small class="flat">puan</small>'],
+    ["Ort. pozisyon", gk.cur.position.toLocaleString("tr-TR"), delta(gk.cur.position, gk.prev.position, { invert: true, asPts: true })],
+  ];
+  const tile = ([l, v, d]) => `<div class="kpi"><span class="lbl">${l}</span><span class="val">${v}</span><span>${d}</span></div>`;
+  $("kpis").innerHTML = [["GA4 · site trafiği", k.slice(0, 3)], ["Search Console · organik", k.slice(3)]].map(([h, ts]) => `<div><h3>${h}</h3><div class="kpis">${ts.map(tile).join("")}</div></div>`).join("");
+
+  // ---- müvekkil adayı ----
+  const ts = a.trackingStart;
+  $("trackNote").innerHTML = `<b>Ölçüm notu:</b> WhatsApp tıklaması (<code>whatsapp_click</code>) ve form gönderimi (<code>contact_form_sent</code>) olayları ${dshort(ts)} tarihinde canlıya alındı. Öncesinde yalnızca WhatsApp giden link tıklamaları (GA4 giden bağlantı) görülebiliyor; açık renkli haftalar bu kısmi veriyi gösterir. Telefon tıklamaları şu an olay olarak ölçülmüyor.`;
+  bars($("chLeads"), a.weekly, "leads", { dimBefore: new Date(Date.parse(ts) - 6 * 864e5).toISOString().slice(0, 10), label: "aksiyon" });
+  $("chLeads").insertAdjacentHTML("beforeend", `<div class="legend"><span><i style="background:var(--bar-dim)"></i>Yalnız WhatsApp linki (eski ölçüm)</span><span><i style="background:var(--bar)"></i>Tüm aksiyonlar</span></div>`);
+  const ev = ak.cur.events;
+  hbars($("leadTypes"), [
+    { n: "WhatsApp (giden link)", v: ak.cur.waOutbound }, { n: "WhatsApp tıklama", v: ev.whatsapp_click || 0 }, { n: "Form gönderimi", v: ev.contact_form_sent || 0 },
+  ], "n", "v");
+
+  table($("tChannels"), [["Kanal"], ["Oturum", "n"], ["Önceki", "n"], ["Değişim", "n"], ["Etkileşim", "n"], ["Aksiyon", "n"]],
+    a.channels.map(c => `<tr><td>${esc(c.channel)}</td><td class="n">${fmt(c.cur)}</td><td class="n">${fmt(c.prev)}</td><td class="n">${delta(c.cur, c.prev)}</td><td class="n">${c.cur ? pct(c.engaged / c.cur, 0) : "–"}</td><td class="n">${fmt(c.leads)}</td></tr>`));
+  table($("tLanding"), [["Giriş sayfası"], ["Oturum", "n"], ["Etkileşim", "n"], ["Ort. süre", "n"], ["Aksiyon", "n"], ["WA link", "n"]],
+    a.landing.slice(0, 15).map(r => `<tr><td class="path">${label(r.page)}</td><td class="n">${fmt(r.sessions)}</td><td class="n">${pct(r.engagement, 0)}</td><td class="n">${Math.round(r.duration)} sn</td><td class="n">${fmt(r.leads)}</td><td class="n">${fmt(r.waOutbound)}</td></tr>`));
+
+  // ---- seo ----
+  bars($("chClicks"), g.weekly, "clicks", { label: "tıklama" });
+  bars($("chImpr"), g.weekly, "impressions", { label: "gösterim" });
+  const status = t => !t.impressions ? '<span class="pill bad">Gösterim yok</span>' : !t.clicks ? '<span class="pill warn">Tık yok</span>' : t.prevClicks && t.clicks < t.prevClicks ? '<span class="pill warn">Düşüşte</span>' : '<span class="pill good">Tık alıyor</span>';
+  table($("tTracked"), [["URL"], ["Durum"], ["Tık", "n"], ["Δ", "n"], ["Gösterim", "n"], ["CTR", "n"], ["Poz.", "n"]],
+    g.tracked.map(t => `<tr><td class="path">${label(t.page)}</td><td>${status(t)}</td><td class="n">${fmt(t.clicks)}</td><td class="n">${delta(t.clicks, t.prevClicks)}</td><td class="n">${fmt(t.impressions)}</td><td class="n">${t.impressions ? pct(t.clicks / t.impressions) : "–"}</td><td class="n">${t.position ?? "–"}</td></tr>`));
+
+  // ---- keyword ----
+  table($("tGroups"), [["Grup"], ["Tık", "n"], ["Δ", "n"], ["Gösterim", "n"], ["Δ", "n"], ["CTR", "n"], ["Poz.", "n"]],
+    g.groups.map(r => `<tr><td><details><summary>${esc(r.group)}</summary><ul>${r.top.map(q => `<li>${esc(q.query)} · ${fmt(q.clicks)} tık · ${fmt(q.impressions)} gös · ${q.position}</li>`).join("") || "<li>Sorgu yok</li>"}</ul></details></td><td class="n">${fmt(r.cur.clicks)}</td><td class="n">${delta(r.cur.clicks, r.prev.clicks)}</td><td class="n">${fmt(r.cur.impressions)}</td><td class="n">${delta(r.cur.impressions, r.prev.impressions)}</td><td class="n">${r.cur.impressions ? pct(r.cur.clicks / r.cur.impressions) : "–"}</td><td class="n">${r.cur.position ?? "–"}</td></tr>`));
+  table($("tOpps"), [["Sorgu"], ["Grup"], ["Gösterim", "n"], ["Tık", "n"], ["CTR", "n"], ["Poz.", "n"]],
+    g.opportunities.slice(0, 15).map(o => `<tr><td>${esc(o.query)}</td><td>${esc(o.group)}</td><td class="n">${fmt(o.impressions)}</td><td class="n">${fmt(o.clicks)}</td><td class="n">${pct(o.ctr)}</td><td class="n">${o.position}</td></tr>`));
+
+  // ---- içerik ----
+  table($("tPages"), [["Sayfa"], ["Tık", "n"], ["Δ", "n"], ["Gösterim", "n"], ["CTR", "n"], ["Poz.", "n"], ["Önceki poz.", "n"]],
+    g.pages.slice(0, 25).map(p => `<tr><td class="path">${label(p.page)}</td><td class="n">${fmt(p.clicks)}</td><td class="n">${delta(p.clicks, p.prevClicks)}</td><td class="n">${fmt(p.impressions)}</td><td class="n">${p.impressions ? pct(p.clicks / p.impressions) : "–"}</td><td class="n">${p.position ?? "–"}</td><td class="n">${p.prevPosition ?? "–"}</td></tr>`));
+
+  // ---- kitle ----
+  hbars($("city"), a.city.map(c => ({ n: c.city === "(not set)" ? "Bilinmiyor" : c.city, v: c.sessions })), "n", "v");
+  const dev = { mobile: "Mobil", desktop: "Masaüstü", tablet: "Tablet" };
+  hbars($("device"), a.device.map(c => ({ n: dev[c.deviceCategory] || c.deviceCategory, v: c.sessions })), "n", "v");
+
+  $("foot").textContent = sample
+    ? "ÖRNEK VERİ · Gerçek ölçüm değildir. Kaynaklar canlıda: Google Search Console (gercekhukuk.com.tr) ve GA4."
+    : `Son güncelleme: ${D.generated} · Kaynak: Google Search Console (gercekhukuk.com.tr) ve GA4.`;
+}
+
+// ---- Örnek veri: yalnızca önizleme için, sabit tohumlu; gerçek ölçüm değildir ----
+function makeSample() {
+  let s = 20261114;
+  const rnd = () => { s |= 0; s = s + 0x6D2B79F5 | 0; let t = Math.imul(s ^ s >>> 15, 1 | s); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; };
+  const day = 864e5, add = (d, n) => new Date(Date.parse(d) + n * day).toISOString().slice(0, 10);
+  const sum = (arr, k) => arr.reduce((x, r) => x + r[k], 0);
+  const r1 = v => Math.round(v * 10) / 10;
+
+  // Search Console
+  const gw = Array.from({ length: 26 }, (_, i) => {
+    const t = i / 25, impressions = Math.round((1300 + t * 4300) * (.9 + rnd() * .2));
+    return { week: add("2026-05-09", i * 7), clicks: Math.round(impressions * (.011 + rnd() * .006 + t * .002)), impressions, position: r1(9.6 - t * 2.2 + rnd() * .6) };
+  });
+  const kp = arr => ({ clicks: sum(arr, "clicks"), impressions: sum(arr, "impressions"), ctr: sum(arr, "clicks") / sum(arr, "impressions"), position: r1(sum(arr, "position") / arr.length) });
+  const gc = kp(gw.slice(-4)), gp = kp(gw.slice(-8, -4));
+
+  // [grup, tık payı, gösterim payı, ort. poz., sorgular]
+  const GROUPS = [
+    ["Marka", .05, .01, 2.4, ["gerçek hukuk", "kazım onur gerçek", "av. kazım onur gerçek", "gerçek hukuk ve arabuluculuk bürosu"]],
+    ["Doçentlik / Yükseköğretim", .30, .22, 6.1, ["doçentlik başvurusu reddi", "doçentlik iptal davası", "doçentlik kriterleri değişti", "jüri raporu iptal davası", "doçentlik ret iptal dava süresi", "yükseköğretim hukuku avukatı"]],
+    ["Hesaplama araçları", .27, .30, 7.4, ["kıdem tazminatı hesaplama 2026", "kira artış oranı kasım 2026", "yasal faiz hesaplama", "ihbar tazminatı hesaplama", "arabuluculuk ücreti hesaplama", "kira artış oranı hesaplama"]],
+    ["Arabuluculuk", .10, .13, 8.3, ["arabuluculuk ücreti 2026", "arabulucu ücret tarifesi", "dava şartı arabuluculuk", "ticari arabuluculuk"]],
+    ["İş hukuku", .08, .11, 9.2, ["işe iade davası", "iş hukuku avukatı istanbul", "kıdem tazminatı davası", "fazla mesai alacağı"]],
+    ["İcra hukuku", .04, .06, 10.8, ["icra takibine itiraz", "ilamsız icra takibi", "haciz kaldırma"]],
+    ["Aile hukuku", .03, .05, 11.6, ["anlaşmalı boşanma", "nafaka artırım davası", "velayet davası"]],
+    ["Bilişim suçları", .02, .03, 12.1, ["bilişim suçları avukatı", "hesap ele geçirme suçu"]],
+    ["Şirketler / KVKK", .04, .04, 9.8, ["avukatlar için kvkk", "kvkk aydınlatma metni avukat", "sözleşme yönetimi"]],
+    ["Diğer", .07, .05, 9.0, ["avukat kadıköy", "hukuki danışmanlık online", "avukat seçerken dikkat edilecekler"]],
+  ];
+  const shares = i => { const t = GROUPS.reduce((x, g) => x + g[i], 0); return GROUPS.map(g => g[i] / t); };
+  const cs = shares(1), is = shares(2);
+  const groups = GROUPS.map((g, gi) => {
+    const mk = (kc, ki, f) => ({ clicks: Math.round(gc.clicks * cs[gi] * kc * f), impressions: Math.round(gc.impressions * is[gi] * ki * f), position: r1(g[3] + (rnd() - .5) * .8) });
+    const cur = mk(1, 1, 1), f = .7 + rnd() * .5, prev = { clicks: Math.round(cur.clicks * f), impressions: Math.round(cur.impressions * (.75 + rnd() * .4)), position: r1(cur.position + (rnd() - .4) * 1.2) };
+    const wC = g[4].map((_, i) => 1 / (i + 1) ** 1.2), wI = g[4].map((_, i) => 1 / (i + 1) ** .8);
+    const sC = wC.reduce((x, y) => x + y, 0), sI = wI.reduce((x, y) => x + y, 0);
+    const top = g[4].map((q, i) => ({ query: q, clicks: Math.round(cur.clicks * .8 * wC[i] / sC), impressions: Math.round(cur.impressions * .8 * wI[i] / sI), position: r1(Math.max(1, cur.position + (rnd() - .5) * 4)) }))
+      .sort((x, y) => y.clicks - x.clicks || y.impressions - x.impressions);
+    return { group: g[0], cur, prev, top };
+  });
+  const opportunities = groups.flatMap(g => g.top.map(q => ({ ...q, ctr: q.impressions ? q.clicks / q.impressions : 0, group: g.group })))
+    .filter(q => q.position >= 3 && q.position <= 15 && q.ctr < .03 && q.impressions >= 20).sort((x, y) => y.impressions - x.impressions).slice(0, 15);
+
+  // [yol, tık payı, gösterim payı, ort. poz.]
+  const PAGES = [
+    ["/hizmetler/docentlik-iptal-davalari", .17, .09, 5.8], ["/hesaplama-araclari/kidem-ve-ihbar-tazminati", .15, .17, 7.0],
+    ["/hesaplama-araclari/kira-artis-orani", .14, .16, 6.4], ["/yazilar/docentlik-basvurusunun-reddi-iptali-islemlerine-karsi-acilacak-iptal-davalari", .13, .08, 5.2],
+    ["/hesaplama-araclari/arabuluculuk-ucreti", .08, .10, 8.1], ["/hesaplama-araclari/yasal-faiz", .07, .09, 8.7],
+    ["/", .06, .05, 4.1], ["/yazilar/docentlik-kriterleri-degistirildi-ne-yapmali", .00, .00, null],
+    ["/hizmetler/arabuluculuk", .03, .04, 9.6], ["/hizmetler/is-hukuku", .03, .04, 10.4], ["/yazilar/avukatlar-icin-kvkk-uygulama-rehberi", .03, .02, 8.8],
+    ["/hakkimda", .02, .01, 5.5], ["/iletisim", .02, .01, 4.4], ["/sss", .02, .02, 8.2], ["/en", .01, .01, 14.5],
+    ["/hizmetler/yuksekogrenim-hukuku", .02, .02, 9.1], ["/hizmetler/icra-hukuku", .01, .02, 11.9], ["/hizmetler/aile-hukuku", .01, .01, 12.6],
+  ].filter(p => p[3] != null);
+  const pages = PAGES.map(p => {
+    const clicks = Math.round(gc.clicks * .85 * p[1]), impressions = Math.round(gc.impressions * .85 * p[2]);
+    return { page: p[0], clicks, impressions, position: p[3], prevClicks: Math.round(clicks * (.6 + rnd() * .7)), prevImpressions: Math.round(impressions * (.8 + rnd() * .3)), prevPosition: r1(p[3] + (rnd() - .4) * 1.5) };
+  }).sort((x, y) => y.clicks - x.clicks);
+  const trackPaths = ["/hizmetler/docentlik-iptal-davalari", "/hizmetler/arabuluculuk", "/hizmetler/is-hukuku", "/hizmetler/yuksekogrenim-hukuku", "/hesaplama-araclari/kidem-ve-ihbar-tazminati", "/hesaplama-araclari/kira-artis-orani", "/hesaplama-araclari/arabuluculuk-ucreti", "/hesaplama-araclari/yasal-faiz"];
+  const tracked = trackPaths.map(p => pages.find(x => x.page === p)).filter(Boolean);
+  tracked.push({ page: "/yazilar/docentlik-kriterleri-degistirildi-ne-yapmali", clicks: 0, impressions: 0, position: null, prevClicks: 0, prevImpressions: 0, prevPosition: null });
+
+  // GA4
+  const trackingStart = "2026-10-03", ws = add("2026-05-11", 0);
+  const aw = Array.from({ length: 26 }, (_, i) => {
+    const week = add(ws, i * 7), t = i / 25, sessions = Math.round((70 + t * 330) * (.85 + rnd() * .3));
+    const tracked = week >= add(trackingStart, -6);
+    return { week, sessions, engaged: Math.round(sessions * (.4 + rnd() * .12)), leads: tracked ? Math.round(sessions * (.03 + rnd() * .025)) : Math.round(sessions * (.006 + rnd() * .01)) };
+  });
+  const cs4 = aw.slice(-4), ps4 = aw.slice(-8, -4);
+  const wa = Math.round(sum(cs4, "leads") * .7), form = Math.round(sum(cs4, "leads") * .25);
+  const gaCur = { sessions: sum(cs4, "sessions"), totalUsers: Math.round(sum(cs4, "sessions") * .93), engagedSessions: sum(cs4, "engaged"), averageSessionDuration: 58, events: { whatsapp_click: wa, contact_form_sent: form }, waOutbound: Math.round(wa * 1.08) };
+  const gaPrev = { sessions: sum(ps4, "sessions"), totalUsers: Math.round(sum(ps4, "sessions") * .93), engagedSessions: sum(ps4, "engaged"), averageSessionDuration: 52, events: { whatsapp_click: Math.round(wa * .45), contact_form_sent: Math.round(form * .4) }, waOutbound: Math.round(wa * .8) };
+
+  const CH = [["Organic Search", .58], ["Direct", .20], ["Referral", .08], ["AI Assistant", .06], ["Organic Social", .05], ["Email", .03]];
+  const channels = CH.map(([channel, sh], i) => {
+    const cur = Math.round(gaCur.sessions * sh);
+    return { channel, cur, prev: Math.round(cur * (.7 + rnd() * .6)), engaged: Math.round(cur * (.62 - i * .06)), leads: Math.round(leadsOf(gaCur) * [.42, .3, .14, .08, .04, .02][i]) };
+  });
+  function leadsOf(k) { return Math.max(k.waOutbound, k.events.whatsapp_click) + k.events.contact_form_sent; }
+  const LD = [["/", .34, .22], ["/hesaplama-araclari/kidem-ve-ihbar-tazminati", .12, .0], ["/hesaplama-araclari/kira-artis-orani", .1, .0], ["/hizmetler/docentlik-iptal-davalari", .09, .12],
+    ["/yazilar/docentlik-basvurusunun-reddi-iptali-islemlerine-karsi-acilacak-iptal-davalari", .07, .03], ["/hesaplama-araclari/arabuluculuk-ucreti", .05, .0], ["/online-danismanlik", .04, .3], ["/iletisim", .04, .25],
+    ["/hakkimda", .03, .04], ["/en", .03, .04], ["/hesaplama-araclari/yasal-faiz", .03, .0], ["/sss", .02, .0], ["/hizmetler/arabuluculuk", .02, .0]];
+  const landing = LD.map(([page, sh, ls]) => {
+    const sessions = Math.round(gaCur.sessions * sh), l = Math.round(leadsOf(gaCur) * ls);
+    return { page, sessions, engagement: Math.min(.95, .3 + rnd() * .4), duration: 20 + rnd() * 90, leads: l, waOutbound: Math.round(l * .7) };
+  });
+  const cities = [["Istanbul", .52], ["Ankara", .14], ["Izmir", .07], ["Bursa", .04], ["Antalya", .03], ["Konya", .02], ["(not set)", .06]]
+    .map(([city, sh]) => ({ city, sessions: Math.round(gaCur.sessions * sh) }));
+  const device = [["mobile", .62], ["desktop", .35], ["tablet", .03]].map(([deviceCategory, sh]) => ({ deviceCategory, sessions: Math.round(gaCur.sessions * sh) }));
+
+  return {
+    generated: "örnek",
+    gsc: { range: { cur: ["2026-10-14", "2026-11-10"], prev: ["2026-09-16", "2026-10-13"] }, kpi: { cur: gc, prev: gp }, weekly: gw, groups, opportunities, pages, tracked },
+    ga: { range: { cur: ["2026-10-16", "2026-11-12"], prev: ["2026-09-18", "2026-10-15"] }, trackingStart, kpi: { cur: gaCur, prev: gaPrev }, weekly: aw, channels, landing, city: cities, device },
+  };
+}
+
+function show(D, sample) {
+  const has = !!D;
+  $("empty").hidden = has; $("content").hidden = !has; $("jump").hidden = !has; $("sample").hidden = !sample;
+  if (!has) { $("ranges").textContent = ""; $("foot").textContent = "Kaynak: Google Search Console (gercekhukuk.com.tr) ve GA4."; return; }
+  render(D, sample);
+}
+$("sampleOn").addEventListener("click", () => show(makeSample(), true));
+$("sampleOff").addEventListener("click", () => show(DATA, false));
+show(DATA, false);
+</script>
