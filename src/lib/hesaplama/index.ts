@@ -1,5 +1,8 @@
 import {
   ARABULUCULUK_DILIMLERI,
+  ARABULUCULUK_SERI,
+  ARABULUCU_KDV,
+  ARABULUCU_STOPAJ,
   ARABULUCULUK_TURLERI,
   DAMGA_VERGISI,
   KIDEM_TAVANI,
@@ -55,10 +58,11 @@ export function kiraArtis(mevcutKira: number, oran: number) {
 
 export type ArabuluculukTuru = keyof typeof ARABULUCULUK_TURLERI;
 
-export function arabuluculukUcreti(tur: ArabuluculukTuru, tarafGrubu: 0 | 1 | 2 | 3, anlasma: boolean, tutar = 0) {
+export function arabuluculukUcreti(tur: ArabuluculukTuru, tarafGrubu: 0 | 1 | 2 | 3, anlasma: boolean, tutar = 0, seri = false) {
   const t = ARABULUCULUK_TURLERI[tur];
   const saatUcreti = t.saat[tarafGrubu];
   if (!anlasma) return { ucret: saatUcreti * 2, saatUcreti, nispi: 0, asgari: t.asgari };
+  if (seri) return { ucret: tur === "ticari" ? ARABULUCULUK_SERI.ticari : ARABULUCULUK_SERI.diger, saatUcreti, nispi: 0, asgari: t.asgari };
 
   let kalan = Math.max(tutar, 0);
   let nispi = 0;
@@ -70,6 +74,13 @@ export function arabuluculukUcreti(tur: ArabuluculukTuru, tarafGrubu: 0 | 1 | 2 
   }
   nispi = yuvarla(nispi);
   return { ucret: Math.max(nispi, t.asgari), saatUcreti, nispi, asgari: t.asgari };
+}
+
+// Tarife ücreti KDV hariç brüttür: KDV eklenir, stopaj brüt üzerinden kesilir.
+export function arabuluculukVergi(ucret: number) {
+  const kdv = yuvarla(ucret * ARABULUCU_KDV);
+  const stopaj = yuvarla(ucret * ARABULUCU_STOPAJ);
+  return { kdv, stopaj, toplam: yuvarla(ucret + kdv), net: yuvarla(ucret + kdv - stopaj) };
 }
 
 export function yasalFaiz(anapara: number, baslangic: string, bitis: string) {

@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { arabuluculukUcreti, kidemIhbar, kiraArtis, yasalFaiz } from "./index.ts";
+import { arabuluculukUcreti, arabuluculukVergi, kidemIhbar, kiraArtis, yasalFaiz } from "./index.ts";
 import { validateContact } from "../contact.ts";
 
 test("kıdem ve ihbar: 6 yıl 9 ay, tavan altı", () => {
@@ -41,6 +41,13 @@ test("arabuluculuk ücreti", () => {
   assert.equal(arabuluculukUcreti("is", 0, true, 100000).ucret, 9000);
   assert.equal(arabuluculukUcreti("ticari", 0, true, 1000000).ucret, 56000);
   assert.equal(arabuluculukUcreti("is", 0, false).ucret, 4520);
+});
+
+test("arabuluculuk: seri uyuşmazlık sabit ücret, vergi dökümü", () => {
+  assert.equal(arabuluculukUcreti("ticari", 0, true, 5000000, true).ucret, 7500);
+  assert.equal(arabuluculukUcreti("is", 0, true, 5000000, true).ucret, 6000);
+  assert.equal(arabuluculukUcreti("is", 0, false, 0, true).ucret, 4520);
+  assert.deepEqual(arabuluculukVergi(9000), { kdv: 1800, stopaj: 1800, toplam: 10800, net: 9000 });
 });
 
 test("yasal faiz: oran değişimini böler", () => {

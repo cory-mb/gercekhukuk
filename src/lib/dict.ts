@@ -56,7 +56,7 @@ export const AXES = {
 
 export const UI = {
   tr: {
-    home: "Anasayfa", services: "Hizmetler", about: "Hakkımda", articles: "Yazılar", calculators: "Hesaplama", calculatorsLong: "Hesaplama Araçları",
+    home: "Anasayfa", services: "Hizmetler", about: "Hakkımda", articles: "Yazılar", calculators: "Hesaplamalar", calculatorsLong: "Hesaplama Araçları",
     faq: "SSS", contact: "İletişim", online: "Online Danışmanlık", privacy: "KVKK", cta: "Randevu Talep Et",
     switchLabel: "English", switchLang: "en", menu: "Menüyü aç/kapat", breadcrumb: "Sayfa yolu",
     tagline: "Av. Kazım Onur Gerçek LL.M — Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, iş geliştirme ve kurumsallaşma.",

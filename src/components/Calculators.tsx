@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { arabuluculukUcreti, kidemIhbar, kiraArtis, yasalFaiz, type ArabuluculukTuru } from "@/lib/hesaplama/index.ts";
-import { ARABULUCULUK_TURLERI, GELIR_VERGISI_DILIMLERI, KIRA_ARTIS } from "@/lib/hesaplama/parametreler.ts";
+import { arabuluculukUcreti, arabuluculukVergi, kidemIhbar, kiraArtis, yasalFaiz, type ArabuluculukTuru } from "@/lib/hesaplama/index.ts";
+import { ARABULUCULUK_TURLERI, GELIR_VERGISI_DILIMLERI, KIRA_ORANLARI } from "@/lib/hesaplama/parametreler.ts";
 
 type Lang = "tr" | "en";
 
@@ -12,9 +12,9 @@ const T = {
     kidem: "Kıdem tazminatı", ihbar: "İhbar tazminatı", brut: "Brüt", damga: "Damga vergisi", gelir: "Gelir vergisi", net: "Net",
     sure: "Çalışma süresi", gun: "gün", hafta: "hafta", tavanNot: "Ücret kıdem tavanını aştığı için tavan esas alındı:", tavanYok: "Bu çıkış tarihi için tavan tanımlı değil; kıdem tazminatı hesaplanmadı.",
     kidemYok: "Bir yıldan az çalışmada kıdem tazminatı hakkı doğmaz.",
-    kira: "Mevcut aylık kira", oran: "Artış oranı (%)", oranNot: `${KIRA_ARTIS.donem} için TÜFE 12 aylık ortalama: %${KIRA_ARTIS.oran.toLocaleString("tr-TR")}`, artis: "Artış tutarı", yeni: "Yeni kira",
+    kira: "Mevcut aylık kira", oran: "Artış oranı (%)", kiraAyi: "Kira yenileme ayı", oranNot: "Seçilen ay için TÜFE 12 aylık ortalama değişimi (TÜİK); isterseniz oranı değiştirebilirsiniz.", artis: "Artış tutarı", yeni: "Yeni kira",
     tur: "Uyuşmazlık türü", taraf: "Taraf sayısı", sonuc: "Sonuç", anlasma: "Anlaşma sağlandı", anlasmama: "Anlaşma sağlanamadı", tutar: "Anlaşılan tutar",
-    ucretSonuc: "Arabuluculuk ücreti", nispi: "Nispi hesap", asgari: "Asgari ücret", saat: "Saat ücreti", anlasmamaNot: "Dava şartı arabuluculukta iki saatlik ücret Adalet Bakanlığı bütçesinden ödenir.", anlasmaNot: "Aksi kararlaştırılmadıkça taraflarca eşit ödenir.",
+    ucretSonuc: "Arabuluculuk ücreti", nispi: "Nispi hesap", asgari: "Asgari ücret", saat: "Saat ücreti", anlasmamaNot: "Dava şartı arabuluculukta iki saatlik ücret Adalet Bakanlığı bütçesinden ödenir.", anlasmaNot: "Aksi kararlaştırılmadıkça taraflarca eşit ödenir.", seri: "Seri uyuşmazlık (aynı taraflı, bir ayda en az 10 başvuru)", seriNot: "Anlaşma halinde dosya başına sabit ücret uygulanır (Tarife m.7/4).", vergiGoster: "KDV ve stopajı göster", brutUcret: "Tarife ücreti (KDV hariç)", kdv: "KDV (%20)", stopaj: "Stopaj (%20)", toplamOdenen: "KDV dahil toplam", netEline: "KDV ve stopaj sonrası arabulucuya net", vergiNot: "KDV ve stopaj tarifede yer almaz; vergi mevzuatı oranlarıyla bilgi amaçlı hesaplanır. Stopaj, ödemeyi yapanın stopaj yükümlüsü olduğu durumlarda söz konusudur.",
     anapara: "Anapara", bas: "Başlangıç (temerrüt) tarihi", bit: "Hesap tarihi", faiz: "Faiz", toplam: "Toplam", donem: "Dönem", oranKisa: "Oran",
   },
   en: {
@@ -22,9 +22,9 @@ const T = {
     kidem: "Severance pay", ihbar: "Notice pay", brut: "Gross", damga: "Stamp duty", gelir: "Income tax", net: "Net",
     sure: "Length of service", gun: "days", hafta: "weeks", tavanNot: "Pay exceeds the severance ceiling, so the ceiling was used:", tavanYok: "No ceiling is defined for this termination date; severance pay was not calculated.",
     kidemYok: "Severance pay requires at least one year of service.",
-    kira: "Current monthly rent", oran: "Increase rate (%)", oranNot: `12-month average CPI change for ${KIRA_ARTIS.donemEn}: ${KIRA_ARTIS.oran}%`, artis: "Increase", yeni: "New rent",
+    kira: "Current monthly rent", oran: "Increase rate (%)", kiraAyi: "Renewal month", oranNot: "12-month average CPI change for the selected month (TÜİK); you can edit the rate.", artis: "Increase", yeni: "New rent",
     tur: "Dispute type", taraf: "Number of parties", sonuc: "Outcome", anlasma: "Settlement reached", anlasmama: "No settlement", tutar: "Settlement amount",
-    ucretSonuc: "Mediation fee", nispi: "Proportional fee", asgari: "Minimum fee", saat: "Hourly fee", anlasmamaNot: "In mandatory mediation, two hours' fee is paid from the Ministry of Justice budget.", anlasmaNot: "Shared equally by the parties unless agreed otherwise.",
+    ucretSonuc: "Mediation fee", nispi: "Proportional fee", asgari: "Minimum fee", saat: "Hourly fee", anlasmamaNot: "In mandatory mediation, two hours' fee is paid from the Ministry of Justice budget.", anlasmaNot: "Shared equally by the parties unless agreed otherwise.", seri: "Serial disputes (same party, at least 10 filings in a month)", seriNot: "On settlement a fixed fee per file applies (Tariff art. 7/4).", vergiGoster: "Show VAT and withholding tax", brutUcret: "Tariff fee (excl. VAT)", kdv: "VAT (20%)", stopaj: "Withholding tax (20%)", toplamOdenen: "Total incl. VAT", netEline: "Net to mediator after VAT and withholding", vergiNot: "VAT and withholding tax are not part of the tariff; they are calculated for information using the statutory rates. Withholding applies where the payer is a withholding agent.",
     anapara: "Principal", bas: "Start (default) date", bit: "Calculation date", faiz: "Interest", toplam: "Total", donem: "Period", oranKisa: "Rate",
   },
 };
@@ -115,12 +115,29 @@ function Kira({ lang }: { lang: Lang }) {
   const t = T[lang];
   const m = money(lang);
   const [kira, setKira] = useState("");
-  const [oran, setOran] = useState(String(KIRA_ARTIS.oran));
+  const [ay, setAy] = useState<string>(KIRA_ORANLARI[0].ay);
+  const [oran, setOran] = useState(String(KIRA_ORANLARI[0].oran));
   const r = kira ? kiraArtis(num(kira), num(oran)) : null;
 
   return (
     <div style={box}>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <Field label={t.kiraAyi}>
+          <select
+            value={ay}
+            onChange={(e) => {
+              setAy(e.target.value);
+              setOran(String(KIRA_ORANLARI.find((k) => k.ay === e.target.value)!.oran));
+            }}
+            style={inputStyle}
+          >
+            {KIRA_ORANLARI.map((k) => (
+              <option key={k.ay} value={k.ay}>
+                {new Date(k.ay + "-01T00:00:00Z").toLocaleDateString(lang === "tr" ? "tr-TR" : "en-GB", { month: "long", year: "numeric", timeZone: "UTC" })}
+              </option>
+            ))}
+          </select>
+        </Field>
         <Field label={t.kira}><input inputMode="decimal" value={kira} onChange={(e) => setKira(e.target.value)} style={inputStyle} placeholder="20000" /></Field>
         <Field label={t.oran}><input inputMode="decimal" value={oran} onChange={(e) => setOran(e.target.value)} style={inputStyle} /></Field>
       </div>
@@ -137,7 +154,10 @@ function Arabuluculuk({ lang }: { lang: Lang }) {
   const [taraf, setTaraf] = useState<0 | 1 | 2 | 3>(0);
   const [anlasma, setAnlasma] = useState(true);
   const [tutar, setTutar] = useState("");
-  const r = arabuluculukUcreti(tur, taraf, anlasma, num(tutar || "0"));
+  const [seri, setSeri] = useState(false);
+  const [vergi, setVergi] = useState(false);
+  const r = arabuluculukUcreti(tur, taraf, anlasma, num(tutar || "0"), seri);
+  const v = arabuluculukVergi(r.ucret);
 
   return (
     <div style={box}>
@@ -160,18 +180,36 @@ function Arabuluculuk({ lang }: { lang: Lang }) {
             <option value="0">{t.anlasmama}</option>
           </select>
         </Field>
-        {anlasma && (
+        {anlasma && !seri && (
           <Field label={t.tutar}><input inputMode="decimal" value={tutar} onChange={(e) => setTutar(e.target.value)} style={inputStyle} placeholder="100000" /></Field>
         )}
       </div>
+      {anlasma && (
+        <label style={{ display: "flex", gap: "0.5rem", marginTop: "1rem", fontSize: "0.875rem", color: "var(--text)" }}>
+          <input type="checkbox" checked={seri} onChange={(e) => setSeri(e.target.checked)} />
+          {t.seri}
+        </label>
+      )}
       <Rows
         rows={
-          anlasma
-            ? [[t.nispi, m(r.nispi)], [t.asgari, m(r.asgari)], [t.ucretSonuc, m(r.ucret), true]]
-            : [[t.saat, m(r.saatUcreti)], [t.ucretSonuc, m(r.ucret), true]]
+          anlasma && seri
+            ? [[t.ucretSonuc, m(r.ucret), true]]
+            : anlasma
+              ? [[t.nispi, m(r.nispi)], [t.asgari, m(r.asgari)], [t.ucretSonuc, m(r.ucret), true]]
+              : [[t.saat, m(r.saatUcreti)], [t.ucretSonuc, m(r.ucret), true]]
         }
       />
-      <p style={{ marginTop: "1rem", fontSize: "0.8125rem", color: "var(--text-muted)" }}>{anlasma ? t.anlasmaNot : t.anlasmamaNot}</p>
+      <p style={{ marginTop: "1rem", fontSize: "0.8125rem", color: "var(--text-muted)" }}>{anlasma ? (seri ? t.seriNot : t.anlasmaNot) : t.anlasmamaNot}</p>
+      <label style={{ display: "flex", gap: "0.5rem", marginTop: "1rem", fontSize: "0.875rem", color: "var(--text)" }}>
+        <input type="checkbox" checked={vergi} onChange={(e) => setVergi(e.target.checked)} />
+        {t.vergiGoster}
+      </label>
+      {vergi && (
+        <>
+          <Rows rows={[[t.brutUcret, m(r.ucret)], [t.kdv, m(v.kdv)], [t.toplamOdenen, m(v.toplam)], [t.stopaj, m(v.stopaj)], [t.netEline, m(v.net), true]]} />
+          <p style={{ marginTop: "0.75rem", fontSize: "0.8125rem", color: "var(--text-muted)" }}>{t.vergiNot}</p>
+        </>
+      )}
     </div>
   );
 }
