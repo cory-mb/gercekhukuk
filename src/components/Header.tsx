@@ -99,9 +99,20 @@ export default function Header({ lang, pairs }: { lang: Lang; pairs: [string, st
                 </Link>
               )
             )}
-            <Link href={switchHref} hrefLang={t.switchLang} lang={t.switchLang} className="px-3 py-2 text-sm font-medium text-[var(--text-muted)] hover:text-[var(--text)]">
-              {t.switchLabel}
-            </Link>
+            <span className="px-3 py-2 text-sm font-medium text-[var(--text-muted)]">
+              {(["tr", "en"] as const).map((l, i) => (
+                <span key={l}>
+                  {i > 0 && <span aria-hidden> / </span>}
+                  {l === lang ? (
+                    <span aria-current="true" className="font-bold text-[var(--text)]">{l.toUpperCase()}</span>
+                  ) : (
+                    <Link href={switchHref} hrefLang={l} lang={l} aria-label={t.switchLabel} title={t.switchLabel} className="hover:text-[var(--text)]">
+                      {l.toUpperCase()}
+                    </Link>
+                  )}
+                </span>
+              ))}
+            </span>
             <Link
               href={L.contact}
               style={{
