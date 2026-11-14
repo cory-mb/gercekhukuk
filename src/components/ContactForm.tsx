@@ -1,6 +1,7 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { track } from "@/lib/track";
 import { sendContact, type ContactState } from "@/lib/contact-action";
 import { LINKS, SERVICE_LINKS, type Lang } from "@/lib/dict";
 
@@ -34,6 +35,10 @@ const T = {
 export default function ContactForm({ lang = "tr" }: { lang?: Lang }) {
   const [state, formAction, pending] = useActionState<ContactState, FormData>(sendContact, null);
   const t = T[lang];
+
+  useEffect(() => {
+    if (state?.ok) track("contact_form_sent");
+  }, [state]);
 
   if (state?.ok) {
     return (
