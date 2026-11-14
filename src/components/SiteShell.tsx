@@ -1,6 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import Analytics from "@/components/Analytics";
 import { localBusinessSchema } from "@/lib/schema";
 import { getPathPairs } from "@/lib/content";
 import type { Lang } from "@/lib/dict";
@@ -17,6 +18,7 @@ export default function SiteShell({ lang, children }: { lang: Lang; children: Re
         <main className="flex-1">{children}</main>
         <Footer lang={lang} />
         <WhatsAppButton lang={lang} />
+        <Analytics />
       </body>
     </html>
   );
