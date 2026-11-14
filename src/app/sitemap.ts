@@ -9,8 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   // lastmod yalnız gerçek bir tarihi olan yazılar için verilir; diğer sayfalarda yoktur (her deploy'da "şimdi" yazmak
   // Google'ın lastmod'u görmezden gelmesine yol açar).
   const dates = new Map<string, string>([
-    ...getBlogPosts("tr").map((p) => [`${LINKS.tr.articles}/${p.slug}`, p.date] as [string, string]),
-    ...getBlogPosts("en").map((p) => [`${LINKS.en.articles}/${p.slug}`, p.date] as [string, string]),
+    ...getBlogPosts("tr").map((p) => [`${LINKS.tr.articles}/${p.slug}`, p.updated ?? p.date] as [string, string]),
+    ...getBlogPosts("en").map((p) => [`${LINKS.en.articles}/${p.slug}`, p.updated ?? p.date] as [string, string]),
   ]);
   const mod = (p: string) => (dates.has(p) ? { lastModified: dates.get(p) } : {});
   const url = (p: string) => `${SITE_URL}${p === "/" ? "" : p}`;

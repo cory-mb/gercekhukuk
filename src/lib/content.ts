@@ -18,6 +18,7 @@ export interface BlogPost {
   seoTitle?: string;
   description: string;
   date: string;
+  updated?: string;
   category: string;
   readTime: string;
   service?: string;
@@ -77,6 +78,7 @@ export function getBlogPosts(lang: Lang = "tr"): BlogPost[] {
       seoTitle: data.seoTitle,
       description: data.description ?? "",
       date: data.date ?? "",
+      updated: data.updated,
       category: data.category ?? "Genel",
       readTime: data.readTime ?? "5 dakika",
       service: data.service,
