@@ -397,6 +397,7 @@ h1, h2 {
 }
 
 .faq-item .faq-answer {
+  white-space: pre-line;
   padding-bottom: 1.5rem;
   font-size: 0.9375rem;
   line-height: 1.78;
