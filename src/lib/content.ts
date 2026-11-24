@@ -39,7 +39,7 @@ export interface Service {
   related: string[];
   updated: string;
   readTime: string;
-  faqs: { q: string; a: string }[];
+  faqs: { q: string; a: string; g?: string }[];
   content: string;
 }
 
@@ -53,7 +53,7 @@ export interface Tool {
   tool: string;
   service?: string;
   order: number;
-  faqs: { q: string; a: string }[];
+  faqs: { q: string; a: string; g?: string }[];
   content: string;
 }
 

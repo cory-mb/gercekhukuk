@@ -42,7 +42,15 @@ export default function FaqView({ lang }: { lang: Lang }) {
       <div className="max-w-4xl mx-auto px-6 lg:px-12 py-14">
         <p style={{ marginBottom: "2rem", fontSize: "0.9375rem", color: "var(--text-muted)" }}>{c.lead}</p>
 
-        <FaqList lang={lang} groups={groups.map((s) => ({ slug: s.slug, title: s.title, href: `${LINKS[lang].services}/${s.slug}`, faqs: s.faqs }))} />
+        <FaqList lang={lang} groups={groups.flatMap((s) =>
+          // faq'larda `g` (alt grup) varsa hizmet, grup başına ayrı başlık olur.
+          [...new Set(s.faqs.map((f) => f.g ?? ""))].map((g) => ({
+            slug: g ? `${s.slug}-${g}` : s.slug,
+            title: g || s.title,
+            href: `${LINKS[lang].services}/${s.slug}`,
+            faqs: s.faqs.filter((f) => (f.g ?? "") === g),
+          })),
+        )} />
 
         <div style={{ marginTop: "3rem", padding: "2.5rem", background: "var(--stone-2)", display: "flex", flexWrap: "wrap", alignItems: "center", justifyContent: "space-between", gap: "1.5rem", borderTop: "1.5px solid var(--gold)" }}>
           <p style={{ fontFamily: "'EB Garamond', serif", fontSize: "1.25rem", fontWeight: 500, color: "var(--text)" }}>

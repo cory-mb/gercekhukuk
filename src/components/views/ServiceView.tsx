@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -50,8 +51,10 @@ export default function ServiceView({ lang, slug }: { lang: Lang; slug: string }
             {s.faqs.length > 0 && (
               <>
                 <h2>{t.faqTitle}</h2>
-                {s.faqs.map((f) => (
-                  <details key={f.q} className="faq-item">
+                {s.faqs.map((f, i) => (
+                  <Fragment key={f.q}>
+                  {f.g && f.g !== s.faqs[i - 1]?.g && <h3>{f.g}</h3>}
+                  <details className="faq-item">
                     <summary>
                       {f.q}
                       <svg viewBox="0 0 20 20" fill="currentColor" style={{ width: "1rem", height: "1rem", color: "var(--gold)", flexShrink: 0, transition: "transform 0.2s" }}>
@@ -60,6 +63,7 @@ export default function ServiceView({ lang, slug }: { lang: Lang; slug: string }
                     </summary>
                     <div className="faq-answer">{f.a}</div>
                   </details>
+                  </Fragment>
                 ))}
               </>
             )}
