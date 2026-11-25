@@ -126,7 +126,7 @@ export default function Header({ lang, pairs, groups, tools }: { lang: Lang; pai
 
         {/* Mobile menu */}
         {open && (
-          <div className="lg:hidden border-t border-[var(--border)] py-3">
+          <div className="lg:hidden border-t border-[var(--border)] py-3 overflow-y-auto overscroll-contain" style={{ maxHeight: "calc(100dvh - 4rem)" }}>
             {NAV.map((item) => (
               <div key={item.href}>
                 <Link
