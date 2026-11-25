@@ -56,7 +56,7 @@ export const AXES = {
 
 export const UI = {
   tr: {
-    home: "Anasayfa", services: "Hizmetler", about: "Hakkımda", articles: "Yazılar", calculators: "Hesaplamalar", calculatorsLong: "Hesaplama Araçları",
+    home: "Anasayfa", allServices: "Tüm hizmetler", services: "Hizmetler", about: "Hakkımda", articles: "Yazılar", calculators: "Hesaplamalar", calculatorsLong: "Hesaplama Araçları",
     faq: "SSS", contact: "İletişim", online: "Online Danışmanlık", privacy: "KVKK", cta: "Randevu Talep Et",
     switchLabel: "English", switchLang: "en", menu: "Menüyü aç/kapat", breadcrumb: "Sayfa yolu",
     tagline: "Av. Kazım Onur Gerçek LL.M — Şirketlere hukuki danışmanlık ve mevzuata uyum, dava ve uyuşmazlık çözümü, iş geliştirme ve kurumsallaşma.",
@@ -72,7 +72,7 @@ export const UI = {
     phone: "Telefon", email: "E-posta",
   },
   en: {
-    home: "Home", services: "Services", about: "About", articles: "Articles", calculators: "Calculators", calculatorsLong: "Legal Calculators",
+    home: "Home", allServices: "All services", services: "Services", about: "About", articles: "Articles", calculators: "Calculators", calculatorsLong: "Legal Calculators",
     faq: "FAQ", contact: "Contact", online: "Online Consultation", privacy: "Privacy Notice", cta: "Request an Appointment",
     switchLabel: "Türkçe", switchLang: "tr", menu: "Toggle menu", breadcrumb: "Breadcrumb",
     tagline: "Av. Kazım Onur Gerçek LL.M — Corporate advisory and regulatory compliance, litigation and dispute resolution, business development and institutionalisation.",
