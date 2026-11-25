@@ -9,7 +9,7 @@ import { SITE_NAME } from "@/lib/schema";
 import ServicesNav, { type NavGroup } from "@/components/ServicesNav";
 
 // pairs: [trYolu, enYolu] — layout sunucuda içerikten üretir, burada dil değiştirici için kullanılır.
-export default function Header({ lang, pairs, groups }: { lang: Lang; pairs: [string, string][]; groups: NavGroup[] }) {
+export default function Header({ lang, pairs, groups, tools }: { lang: Lang; pairs: [string, string][]; groups: NavGroup[]; tools: NavGroup }) {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const t = UI[lang];
@@ -48,17 +48,12 @@ export default function Header({ lang, pairs, groups }: { lang: Lang; pairs: [st
           <nav className="hidden lg:flex items-center gap-1">
             {NAV.map((item) =>
               item.children ? (
-                <ServicesNav key={item.href} label={item.label} href={item.href} allLabel={t.allServices} groups={groups} active={pathname.startsWith(item.href)} />
+                <ServicesNav key={item.href} label={item.label} href={item.href} allLabel={t.allServices} groups={groups} tools={tools} active={pathname.startsWith(item.href)} />
               ) : (
                 <Link
                   key={item.href}
                   href={item.href}
-                  className="px-3 py-2 text-sm font-medium transition-colors relative"
-                  style={
-                    pathname === item.href
-                      ? { color: "var(--text)" }
-                      : { color: "var(--text-muted)" }
-                  }
+                  className={`px-3 py-2 text-sm font-medium transition-colors relative hover:text-[var(--gold)] ${pathname === item.href ? "text-[var(--text)]" : "text-[var(--text-muted)]"}`}
                 >
                   {item.label}
                   {pathname === item.href && (
@@ -70,20 +65,6 @@ export default function Header({ lang, pairs, groups }: { lang: Lang; pairs: [st
                 </Link>
               )
             )}
-            <span className="px-3 py-2 text-sm font-medium text-[var(--text-muted)]">
-              {(["tr", "en"] as const).map((l, i) => (
-                <span key={l}>
-                  {i > 0 && <span aria-hidden> / </span>}
-                  {l === lang ? (
-                    <span aria-current="true" className="font-bold text-[var(--text)]">{l.toUpperCase()}</span>
-                  ) : (
-                    <Link href={switchHref} hrefLang={l} lang={l} aria-label={t.switchLabel} title={t.switchLabel} className="hover:text-[var(--text)]">
-                      {l.toUpperCase()}
-                    </Link>
-                  )}
-                </span>
-              ))}
-            </span>
             <Link
               href={L.contact}
               style={{
@@ -111,6 +92,20 @@ export default function Header({ lang, pairs, groups }: { lang: Lang; pairs: [st
             >
               {t.cta}
             </Link>
+            <span className="pl-4 pr-1 py-2 text-sm font-medium text-[var(--text-muted)]">
+              {(["tr", "en"] as const).map((l, i) => (
+                <span key={l}>
+                  {i > 0 && <span aria-hidden> / </span>}
+                  {l === lang ? (
+                    <span aria-current="true" className="font-bold text-[var(--text)]">{l.toUpperCase()}</span>
+                  ) : (
+                    <Link href={switchHref} hrefLang={l} lang={l} aria-label={t.switchLabel} title={t.switchLabel} className="hover:text-[var(--gold)]">
+                      {l.toUpperCase()}
+                    </Link>
+                  )}
+                </span>
+              ))}
+            </span>
           </nav>
 
           {/* Mobile hamburger */}
@@ -147,7 +142,7 @@ export default function Header({ lang, pairs, groups }: { lang: Lang; pairs: [st
                       <div key={g.label}>
                         <p className="pl-8 pr-4 pt-3 pb-1 text-xs font-bold uppercase tracking-wider" style={{ color: "var(--gold-muted)" }}>{g.label}</p>
                         {g.items.map((child) => (
-                          <Link key={child.href} href={child.href} className="block pl-8 pr-4 py-2 text-[var(--text-muted)] hover:text-[var(--text)] text-sm" onClick={() => setOpen(false)}>
+                          <Link key={child.href} href={child.href} className="block pl-8 pr-4 py-2 text-[var(--text-muted)] hover:text-[var(--gold)] text-sm" onClick={() => setOpen(false)}>
                             {child.label}
                           </Link>
                         ))}

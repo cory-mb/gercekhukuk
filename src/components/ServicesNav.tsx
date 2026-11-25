@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
-export type NavGroup = { label: string; desc: string; items: { href: string; label: string }[] };
+export type NavGroup = { key: string; label: string; desc: string; items: { href: string; label: string }[] };
 
 const Chevron = ({ open }: { open: boolean }) => (
   <svg className="w-4 h-4" style={{ transition: "transform .2s", transform: open ? "rotate(180deg)" : "none" }} fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -11,13 +11,13 @@ const Chevron = ({ open }: { open: boolean }) => (
   </svg>
 );
 
-const btn = "flex items-center gap-1 px-3 py-2 text-[var(--text-muted)] hover:text-[var(--text)] text-sm font-medium transition-colors";
-const itemCls = "block py-1.5 text-sm text-[var(--text-muted)] hover:text-[var(--text)] transition-colors";
+const btn = "flex items-center gap-1 px-3 py-2 text-[var(--text-muted)] hover:text-[var(--gold)] text-sm font-medium transition-colors";
+const itemCls = "block py-1.5 px-2 -mx-2 text-sm hover:bg-[var(--stone-2)] text-[var(--text-muted)] hover:text-[var(--gold)] hover:underline underline-offset-4 decoration-[var(--gold)] transition-colors";
 const groupTitle: React.CSSProperties = { fontFamily: "'EB Garamond', serif", fontSize: "1.0625rem", fontWeight: 500, color: "var(--text)", lineHeight: 1.25 };
 
-type Props = { label: string; href: string; allLabel: string; groups: NavGroup[]; active: boolean };
+type Props = { label: string; href: string; allLabel: string; groups: NavGroup[]; tools: NavGroup; active: boolean };
 
-export default function ServicesNav({ label, href, allLabel, groups, active }: Props) {
+export default function ServicesNav({ label, href, allLabel, groups, tools, active }: Props) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
   const timer = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -44,7 +44,7 @@ export default function ServicesNav({ label, href, allLabel, groups, active }: P
       {/* Etiket gerçek bağlantı (/hizmetler); ok klavye ve dokunmatik için. */}
       <div className="flex items-center">
         <Link href={href} className={btn + " !pr-0"} style={color} onClick={close}>{label}</Link>
-        <button className="px-1.5 py-2 text-[var(--text-muted)] hover:text-[var(--text)]" aria-expanded={open} aria-label={label} onClick={() => setOpen(!open)}>
+        <button className="px-1.5 py-2 text-[var(--text-muted)] hover:text-[var(--gold)]" aria-expanded={open} aria-label={label} onClick={() => setOpen(!open)}>
           <Chevron open={open} />
         </button>
       </div>
@@ -54,21 +54,29 @@ export default function ServicesNav({ label, href, allLabel, groups, active }: P
           <div className="absolute left-0 right-0 top-full h-8" aria-hidden />
           <div className="fixed left-0 right-0 top-16 lg:top-20 z-50 shadow-xl" style={{ background: "var(--white)", borderTop: "1px solid var(--border)", borderBottom: "1.5px solid var(--gold)" }}>
             <div className="max-w-7xl mx-auto px-8 py-8 grid grid-cols-3 gap-10">
-              {groups.map((g) => (
-                <div key={g.label}>
-                  <p style={groupTitle}>{g.label}</p>
-                  <p style={{ fontSize: "0.8125rem", color: "var(--text-muted)", margin: "0.25rem 0 0.75rem", lineHeight: 1.45 }}>{g.desc}</p>
-                  <div style={{ borderTop: "1px solid var(--border)", paddingTop: "0.5rem" }}>
-                    {g.items.map((i) => (
-                      <Link key={i.href} href={i.href} className={itemCls} onClick={close}>{i.label}</Link>
-                    ))}
-                  </div>
+              {[
+                groups.filter((g) => g.key !== "dava"),
+                groups.filter((g) => g.key === "dava"),
+                [tools],
+              ].map((col, n) => (
+                <div key={n} style={{ display: "flex", flexDirection: "column", gap: "1.75rem", ...(n === 2 && { borderLeft: "1px solid var(--border)", paddingLeft: "2.5rem" }) }}>
+                  {col.map((g) => (
+                    <div key={g.key}>
+                      <p style={groupTitle}>{g.label}</p>
+                      <p style={{ fontSize: "0.8125rem", color: "var(--text-muted)", margin: "0.25rem 0 0.75rem", lineHeight: 1.45 }}>{g.desc}</p>
+                      <div style={{ borderTop: "1px solid var(--border)", paddingTop: "0.5rem" }}>
+                        {g.items.map((i) => (
+                          <Link key={i.href} href={i.href} className={itemCls} onClick={close}>{i.label}</Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
                 </div>
               ))}
             </div>
             <div style={{ background: "var(--stone-2)" }}>
               <div className="max-w-7xl mx-auto px-8 py-3">
-                <Link href={href} onClick={close} className="text-sm font-medium" style={{ color: "var(--gold-muted)" }}>{allLabel} →</Link>
+                <Link href={href} onClick={close} className="text-sm font-medium text-[var(--text-muted)] hover:text-[var(--gold)] hover:underline underline-offset-4">{allLabel} →</Link>
               </div>
             </div>
           </div>

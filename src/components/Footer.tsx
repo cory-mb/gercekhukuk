@@ -1,15 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
 import { PHONE, PHONE_DISPLAY, EMAIL, SITE_NAME } from "@/lib/schema";
-import { LINKS, SERVICE_LINKS, UI, type Lang } from "@/lib/dict";
+import { LINKS, UI, type Lang } from "@/lib/dict";
+import type { NavGroup } from "@/components/ServicesNav";
 
-export default function Footer({ lang }: { lang: Lang }) {
+export default function Footer({ lang, groups }: { lang: Lang; groups: NavGroup[] }) {
   const t = UI[lang];
   const L = LINKS[lang];
   return (
     <footer style={{ background: "var(--surface-dark)", color: "rgba(255,255,255,0.55)" }}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href={L.home} className="inline-block mb-5">
@@ -37,20 +38,31 @@ export default function Footer({ lang }: { lang: Lang }) {
             </a>
           </div>
 
-          {/* Hizmetler */}
-          <div>
+          {/* Hizmetler: iki sütun, eksen başlıklarıyla */}
+          <div className="lg:col-span-2">
             <p style={{ fontSize: "0.5625rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "rgba(255,255,255,0.3)", marginBottom: "1.25rem", fontFamily: "'Lato', sans-serif" }}>
               {t.services}
             </p>
-            <ul style={{ display: "flex", flexDirection: "column", gap: "0.625rem" }}>
-              {SERVICE_LINKS[lang].map((h) => (
-                <li key={h.href}>
-                  <Link href={h.href} style={{ fontSize: "0.875rem", color: "rgba(255,255,255,0.45)", textDecoration: "none", transition: "color 0.2s" }}>
-                    {h.label}
-                  </Link>
-                </li>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
+              {[groups.filter((g) => g.key === "dava"), groups.filter((g) => g.key !== "dava")].map((col, n) => (
+                <div key={n} style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
+                  {col.map((g) => (
+                    <div key={g.key}>
+                      <p style={{ fontSize: "0.75rem", color: "rgba(255,255,255,0.7)", marginBottom: "0.5rem", lineHeight: 1.4 }}>{g.label}</p>
+                      <ul style={{ display: "flex", flexDirection: "column", gap: "0.4rem" }}>
+                        {g.items.map((h) => (
+                          <li key={h.href}>
+                            <Link href={h.href} style={{ fontSize: "0.8125rem", color: "rgba(255,255,255,0.45)", textDecoration: "none" }}>
+                              {h.label}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
 
           {/* İletişim */}
